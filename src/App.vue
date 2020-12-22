@@ -38,7 +38,6 @@ export default {
             this.schema = JSON.parse(this.textarea);
         },
         generateOutput() {
-            console.log(this.$refs['root'], this.$refs['root'].getValue);
             const value = this.$refs['root'].getValue();
             console.log(value);
         }

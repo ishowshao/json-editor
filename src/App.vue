@@ -1,5 +1,12 @@
 <template>
     <div id="app">
+        <div class="canvas">
+            <h4>画布</h4>
+            <div>
+                <div>comp1</div>
+                <div>comp2</div>
+            </div>
+        </div>
         <div class="schema">
             <el-input type="textarea" :rows="20" placeholder="请输入内容" v-model="textarea"> </el-input>
             <el-button @click="gen">生成</el-button>
@@ -56,13 +63,16 @@ body {
 #app {
     display: flex;
 }
+.canvas {
+    width: 20vw
+}
 .schema {
-    width: 40vw;
+    width: 30vw;
     padding: 10px;
     box-sizing: border-box;
 }
 .form {
-    width: 30vw;
+    width: 20vw;
 }
 .output {
     padding: 0 10px;

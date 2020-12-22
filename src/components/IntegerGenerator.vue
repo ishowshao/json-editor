@@ -8,16 +8,21 @@ export default {
     props: ['schema', 'name'],
     data() {
         return {
-            value: null,
+            value: null
         };
     },
     created() {
         this.value = this.schema.default;
     },
-    watch: {
-        value(newValue) {
-            this.schema.value = Number(newValue);
-        }
+    // watch: {
+    //     value(newValue) {
+    //         this.schema.value = Number(newValue);
+    //     }
+    // },
+    methods: {
+        getValue() {
+            return this.value;
+        },
     }
-}
+};
 </script>

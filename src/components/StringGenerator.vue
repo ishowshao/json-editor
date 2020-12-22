@@ -5,24 +5,24 @@
 </template>
 <script>
 export default {
-    props: ['schema', 'name', 'output'],
+    props: ['schema', 'name'],
     data() {
         return {
-            value: null,
+            value: null
         };
     },
     created() {
         this.value = this.schema.default || null;
     },
-    watch: {
-        value(newValue) {
-            this.output = newValue;
-        },
-    },
+    // watch: {
+    //     value(newValue) {
+    //         this.output = newValue;
+    //     },
+    // },
     methods: {
         getValue() {
             return this.value;
-        }
+        },
     }
-}
+};
 </script>

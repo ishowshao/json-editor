@@ -8,6 +8,9 @@
     <div class="form">
       <el-form ref="form" :model="form" label-width="80px">
         <object-generator :schema="form"></object-generator>
+        <el-form-item>
+          <el-button @click="output">生成output</el-button>
+        </el-form-item>
       </el-form>
     </div>
     <div class="output">output</div>
@@ -39,6 +42,11 @@ export default {
         }
       }
       this.form = schema;
+    },
+    output() {
+      const schema = JSON.parse(this.textarea);
+      console.log(schema);
+
     }
   }
 };

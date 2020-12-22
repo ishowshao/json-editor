@@ -12,7 +12,10 @@
                 </el-form-item>
             </el-form>
         </div>
-        <div class="output">output</div>
+        <div class="output">
+            <h4>output</h4>
+            <code><pre>{{output}}</pre></code>
+        </div>
     </div>
 </template>
 
@@ -30,7 +33,7 @@ export default {
         return {
             textarea: JSON.stringify(input, null, '  '),
             schema: {},
-            output: {}
+            output: null,
         };
     },
     methods: {
@@ -40,6 +43,7 @@ export default {
         generateOutput() {
             const value = this.$refs['root'].getValue();
             console.log(value);
+            this.output = value;
         }
     }
 };
@@ -58,6 +62,10 @@ body {
     box-sizing: border-box;
 }
 .form {
+    width: 30vw;
+}
+.output {
+    padding: 0 10px;
     width: 30vw;
 }
 </style>

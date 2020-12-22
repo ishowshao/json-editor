@@ -19,6 +19,7 @@
 
 <script>
 import schema from '@/assets/input.json'
+import schema2output from '@/lib/output'
 import ObjectGenerator from './components/ObjectGenerator.vue'
 
 export default {
@@ -46,7 +47,7 @@ export default {
     output() {
       const schema = JSON.parse(this.textarea);
       console.log(schema);
-
+      console.log(schema2output(schema));
     }
   }
 };

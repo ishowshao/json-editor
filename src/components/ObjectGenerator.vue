@@ -7,6 +7,7 @@
 <script>
 import StringGenerator from './StringGenerator.vue';
 import IntegerGenerator from './IntegerGenerator.vue';
+import ArrayGenerator from './ArrayGenerator.vue'
 
 export default {
     props: ['schema'],
@@ -15,6 +16,7 @@ export default {
             map: {
                 string: StringGenerator,
                 integer: IntegerGenerator,
+                array: ArrayGenerator,
             },
         };
     }

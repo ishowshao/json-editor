@@ -13,6 +13,38 @@
             "default": 25,
             "minimum": 18,
             "maximum": 99
+        },
+        "pets": {
+            "type": "array",
+            "format": "table",
+            "title": "Pets",
+            "uniqueItems": true,
+            "items": {
+                "type": "object",
+                "title": "Pet",
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "enum": [
+                            "cat",
+                            "dog",
+                            "bird",
+                            "reptile",
+                            "other"
+                        ],
+                        "default": "dog"
+                    },
+                    "name": {
+                        "type": "string"
+                    }
+                }
+            },
+            "default": [
+                {
+                    "type": "dog",
+                    "name": "Walter"
+                }
+            ]
         }
     }
 }

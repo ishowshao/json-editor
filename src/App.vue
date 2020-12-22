@@ -7,9 +7,8 @@
     </div>
     <div class="form">
       <el-form ref="form" :model="form" label-width="80px">
-        <el-form-item v-for="(value, name) in form" :label="value.label || name" :key="name">
-          <el-input v-model="value.value"></el-input>
-        </el-form-item>
+        <div>{{form.title}}</div>
+        <object-generator :schema="form"></object-generator>
       </el-form>
     </div>
     <div class="output">output</div>
@@ -18,10 +17,13 @@
 
 <script>
 import schema from '@/assets/input.json'
+import ObjectGenerator from './components/ObjectGenerator.vue'
 
 export default {
   name: "App",
-  components: {},
+  components: {
+    ObjectGenerator
+  },
   data() {
     return {
       textarea: JSON.stringify(schema, null, '  '),
@@ -32,7 +34,7 @@ export default {
   methods: {
     gen() {
       const schema = JSON.parse(this.textarea);
-      for (const i in schema) {
+      for (const i in schema.properties) {
         if (schema.hasOwnProperty(i)) {
           schema[i].value = null;
         }

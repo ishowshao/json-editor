@@ -32,7 +32,7 @@ export default {
         },
         getValue() {
             const value = this.items.map((item, index) => {
-                return this.$refs[index].getValue();
+                return this.$refs[index][0].getValue();
             });
             return value;
         },

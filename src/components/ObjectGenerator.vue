@@ -25,7 +25,7 @@ export default {
             const value = {};
             for (const key in this.schema.properties) {
                 if (this.schema.properties.hasOwnProperty(key)) {
-                    value[key] = this.$refs[key].getValue();
+                    value[key] = this.$refs[key][0].getValue();
                 }
             }
             return value;

@@ -6,10 +6,10 @@
       <el-button @click="gen">生成</el-button>
     </div>
     <div class="form">
-      <el-form ref="form" :model="form" label-width="80px">
-        <object-generator :schema="form"></object-generator>
+      <el-form ref="form" label-width="80px">
+        <object-generator :schema="schema" :output="output"></object-generator>
         <el-form-item>
-          <el-button @click="output">生成output</el-button>
+          <el-button @click="generateOutput">生成output</el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import schema from '@/assets/input.json'
+import input from '@/assets/input.json'
 import schema2output from '@/lib/output'
 import ObjectGenerator from './components/ObjectGenerator.vue'
 
@@ -29,9 +29,9 @@ export default {
   },
   data() {
     return {
-      textarea: JSON.stringify(schema, null, '  '),
-      form: {
-      },
+      textarea: JSON.stringify(input, null, '  '),
+      schema: {},
+      output: {},
     }
   },
   methods: {
@@ -44,7 +44,7 @@ export default {
       }
       this.form = schema;
     },
-    output() {
+    generateOutput() {
       const schema = JSON.parse(this.textarea);
       console.log(schema);
       console.log(schema2output(schema));

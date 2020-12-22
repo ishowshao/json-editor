@@ -1,7 +1,7 @@
 <template>
     <div>
         <div>{{schema.title}}</div>
-        <component v-bind:is="map[value.type]" v-for="(value, name) in schema.properties" :key="name" :schema="value" :name="name"></component>
+        <component v-bind:is="map[value.type]" v-for="(value, name) in schema.properties" :schema="value" :name="name" :key="name"></component>
     </div>
 </template>
 <script>
@@ -10,7 +10,7 @@ import IntegerGenerator from './IntegerGenerator.vue';
 import ArrayGenerator from './ArrayGenerator.vue'
 
 export default {
-    props: ['schema'],
+    props: ['schema', 'output'],
     data() {
         return {
             map: {

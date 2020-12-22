@@ -5,7 +5,7 @@
 </template>
 <script>
 export default {
-    props: ['schema', 'name'],
+    props: ['schema', 'name', 'output'],
     data() {
         return {
             value: null,
@@ -16,8 +16,13 @@ export default {
     },
     watch: {
         value(newValue) {
-            this.schema.value = newValue;
+            this.output = newValue;
         },
     },
+    methods: {
+        getValue() {
+            return this.value;
+        }
+    }
 }
 </script>

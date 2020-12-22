@@ -36,18 +36,14 @@ export default {
   },
   methods: {
     gen() {
-      const schema = JSON.parse(this.textarea);
-      for (const i in schema.properties) {
-        if (schema.hasOwnProperty(i)) {
-          schema[i].value = null;
-        }
-      }
-      this.form = schema;
+      this.schema = JSON.parse(this.textarea);
+      this.output = this.generateOutput();
     },
     generateOutput() {
       const schema = JSON.parse(this.textarea);
       console.log(schema);
       console.log(schema2output(schema));
+      return schema;
     }
   }
 };

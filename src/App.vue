@@ -2,9 +2,8 @@
     <div id="app">
         <div class="canvas">
             <h4>画布</h4>
-            <div>
-                <div>comp1</div>
-                <div>comp2</div>
+            <div class="container">
+                <div v-for="comp in components" :key="comp.name" :class="{active: comp.active}" @click="active(comp)">{{comp.name}}</div>
             </div>
         </div>
         <div class="schema">
@@ -41,6 +40,16 @@ export default {
             textarea: JSON.stringify(input, null, '  '),
             schema: {},
             output: null,
+            components: [
+                {
+                    name: 'comp1',
+                    active: true,
+                },
+                {
+                    name: 'comp2',
+                    active: false,
+                },
+            ]
         };
     },
     methods: {
@@ -51,6 +60,10 @@ export default {
             const value = this.$refs['root'].getValue();
             console.log(value);
             this.output = value;
+        },
+        active(component) {
+            this.components.forEach(c => c.active = false);
+            component.active = true;
         }
     }
 };
@@ -77,5 +90,12 @@ body {
 .output {
     padding: 0 10px;
     width: 30vw;
+}
+.container > div {
+    box-sizing: border-box;
+    border: 1px solid #ffffff;
+}
+.container .active {
+    border: 1px solid #cccccc;
 }
 </style>

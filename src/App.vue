@@ -3,7 +3,7 @@
         <div class="canvas">
             <h4>画布</h4>
             <div class="container">
-                <div v-for="comp in components" :key="comp.name" :class="{active: comp.active}" @click="active(comp)">{{comp.name}}</div>
+                <div v-for="comp in components" :key="comp.id" :class="{active: comp.active}" @click="active(comp)">{{comp.name}}</div>
             </div>
         </div>
         <div class="schema">
@@ -27,8 +27,14 @@
 
 <script>
 import input from '@/assets/input.json';
+import input2 from '@/assets/input2.json';
+
 import schema2output from '@/lib/output';
 import ObjectGenerator from './components/ObjectGenerator.vue';
+const schemas = {
+    comp1: input,
+    comp2: input2,
+};
 
 export default {
     name: 'App',
@@ -42,10 +48,12 @@ export default {
             output: null,
             components: [
                 {
+                    id: 'comp1',
                     name: 'comp1',
                     active: true,
                 },
                 {
+                    id: 'comp2',
                     name: 'comp2',
                     active: false,
                 },
@@ -64,6 +72,7 @@ export default {
         active(component) {
             this.components.forEach(c => c.active = false);
             component.active = true;
+            this.textarea = JSON.stringify(schemas[component.id], null, '  ');
         }
     }
 };

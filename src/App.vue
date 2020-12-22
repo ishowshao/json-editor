@@ -7,7 +7,6 @@
     </div>
     <div class="form">
       <el-form ref="form" :model="form" label-width="80px">
-        <div>{{form.title}}</div>
         <object-generator :schema="form"></object-generator>
       </el-form>
     </div>

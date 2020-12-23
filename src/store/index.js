@@ -2,11 +2,11 @@ import Vuex from 'vuex';
 
 const store = new Vuex.Store({
     state: {
-        count: 0
+        data: {}
     },
     mutations: {
-        increment(state) {
-            state.count++;
+        change(state, data) {
+            state.data = data;
         }
     }
 });

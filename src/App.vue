@@ -5,7 +5,8 @@
             <div class="container">
                 <div v-for="comp in components" :key="comp.id" :class="{active: comp.active}" @click="active(comp)">
                     <h6>{{comp.name}}</h6>
-                    <el-button @click="increaseHeight(comp)">+</el-button>
+                    <div :style="{width: (comp.data.width ? `${comp.data.width}px` : `0px`), height: (comp.data.height ? `${comp.data.height}px` : `0px`), border: `1px solid black`}"></div>
+                    <el-button @click="increase(comp)">+</el-button>
                 </div>
             </div>
         </div>
@@ -55,11 +56,25 @@ export default {
                     id: 'comp1',
                     name: 'comp1',
                     active: true,
+                    schema: input,
+                    data: {},
                 },
                 {
                     id: 'comp2',
-                    name: 'comp2',
+                    name: 'Block',
                     active: false,
+                    schema: input2,
+                    data: {
+                        width: 10,
+                        height: 10,
+                    },
+                },
+                {
+                    id: 'comp3',
+                    name: 'Block',
+                    active: false,
+                    schema: input2,
+                    data: {},
                 },
             ]
         };
@@ -78,12 +93,12 @@ export default {
         active(component) {
             this.components.forEach(c => c.active = false);
             component.active = true;
-            const schema = schemas[component.id];
+            const schema = component.schema;
             schema.id = component.id;
-            this.textarea = JSON.stringify(schemas[component.id], null, '  ');
+            this.textarea = JSON.stringify(schema, null, '  ');
         },
-        increaseHeight(component) {
-
+        increase(component) {
+            console.log(component);
         },
     },
     created() {

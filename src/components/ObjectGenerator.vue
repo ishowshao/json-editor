@@ -22,7 +22,9 @@ export default {
     },
     methods: {
         getValue() {
-            const value = {};
+            const value = {
+                id: this.schema.id,
+            };
             for (const key in this.schema.properties) {
                 if (this.schema.properties.hasOwnProperty(key)) {
                     value[key] = this.$refs[key][0].getValue();

@@ -3,7 +3,10 @@
         <div class="canvas">
             <h4>画布</h4>
             <div class="container">
-                <div v-for="comp in components" :key="comp.id" :class="{active: comp.active}" @click="active(comp)">{{comp.name}}</div>
+                <div v-for="comp in components" :key="comp.id" :class="{active: comp.active}" @click="active(comp)">
+                    <h6>{{comp.name}}</h6>
+                    <el-button @click="increaseHeight(comp)">+</el-button>
+                </div>
             </div>
         </div>
         <div class="schema">
@@ -68,12 +71,18 @@ export default {
             const value = this.$refs['root'].getValue();
             console.log(value);
             this.output = value;
+            // emit
         },
         active(component) {
             this.components.forEach(c => c.active = false);
             component.active = true;
+            const schema = schemas[component.id];
+            schema.id = component.id;
             this.textarea = JSON.stringify(schemas[component.id], null, '  ');
-        }
+        },
+        increaseHeight(component) {
+
+        },
     }
 };
 </script>

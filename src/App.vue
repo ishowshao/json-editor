@@ -1,6 +1,11 @@
 <template>
     <div id="app">
         <div class="canvas">
+            <div>添加组件：</div>
+            <div>
+                <el-button size="small">背景颜色组价</el-button>
+                <el-button size="small">调整宽高组件</el-button>
+            </div>
             <h4>画布</h4>
             <div class="container">
                 <div v-for="comp in components" :key="comp.id" :class="{active: comp.active}" @click="active(comp)">

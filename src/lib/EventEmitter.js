@@ -20,9 +20,7 @@ class EventEmitter {
         }
     }
 
-    emit(eventName) {
-        const args = [].slice.call(arguments, 1);
-
+    emit(eventName, ...args) {
         if (Array.isArray(this.events[eventName])) {
             const listeners = this.events[eventName].slice();
             for (let i = 0; i < listeners.length; i++) {

@@ -16,7 +16,7 @@
         </div>
         <div class="form">
             <el-form ref="form" label-width="80px">
-                <object-generator ref="root" :schema="schema" :output="output"></object-generator>
+                <object-generator v-if="schema" ref="root" :schema="schema"></object-generator>
                 <el-form-item>
                     <el-button @click="generateOutput">生成output</el-button>
                 </el-form-item>
@@ -81,7 +81,10 @@ export default {
     },
     methods: {
         gen() {
-            this.schema = JSON.parse(this.textarea);
+            this.schema = null;
+            this.$nextTick(() => {
+                this.schema = JSON.parse(this.textarea);
+            });
         },
         generateOutput() {
             const value = this.$refs['root'].getValue();
@@ -104,6 +107,11 @@ export default {
     created() {
         em.on('change', (id, data) => {
             console.log(id, 'changed', data);
+            this.components.forEach(comp => {
+                if (comp.id === id) {
+                    Object.assign(comp.data, data);
+                }
+            });
         });
     }
 };

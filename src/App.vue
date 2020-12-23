@@ -29,6 +29,7 @@
 </template>
 
 <script>
+import em from '@/lib/em';
 import input from '@/assets/input.json';
 import input2 from '@/assets/input2.json';
 
@@ -72,6 +73,7 @@ export default {
             console.log(value);
             this.output = value;
             // emit
+            em.emit('change', value.id, value);
         },
         active(component) {
             this.components.forEach(c => c.active = false);
@@ -83,6 +85,11 @@ export default {
         increaseHeight(component) {
 
         },
+    },
+    created() {
+        em.on('change', (id, data) => {
+            console.log(id, 'changed', data);
+        });
     }
 };
 </script>

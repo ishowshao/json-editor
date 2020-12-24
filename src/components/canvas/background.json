@@ -1,0 +1,12 @@
+{
+    "title": "背景色组件",
+    "type": "object",
+    "properties": {
+        "color": {
+            "type": "string",
+            "format": "color",
+            "title": "背景色",
+            "default": "#ffffff"
+        }
+    }
+}

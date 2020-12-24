@@ -1,5 +1,5 @@
 <template>
-    <div class="cc-background">背景颜色组价</div>
+    <div class="cc-background">背景颜色组件</div>
 </template>
 <style scoped>
 .cc-background {

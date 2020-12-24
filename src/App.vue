@@ -3,15 +3,13 @@
         <div class="canvas">
             <div>添加组件：</div>
             <div>
-                <el-button size="small">背景颜色组价</el-button>
+                <el-button size="small" @click="addToCanvas(`background`)">背景颜色组价</el-button>
                 <el-button size="small">调整宽高组件</el-button>
             </div>
             <h4>画布</h4>
             <div class="container">
                 <div v-for="comp in components" :key="comp.id" :class="{active: comp.active}" @click="active(comp)">
-                    <h6>{{comp.name}}</h6>
-                    <div :style="{width: (comp.data.width ? `${comp.data.width}px` : `0px`), height: (comp.data.height ? `${comp.data.height}px` : `0px`), border: `1px solid black`}"></div>
-                    <el-button @click="increase(comp)">+</el-button>
+                    <component v-bind:is="comp.component"></component>
                 </div>
             </div>
         </div>
@@ -41,9 +39,16 @@ import input2 from '@/assets/input2.json';
 
 import schema2output from '@/lib/output';
 import ObjectGenerator from './components/ObjectGenerator.vue';
+
+import background from './components/canvas/background';
+
 const schemas = {
     comp1: input,
     comp2: input2,
+};
+
+const componentsMap = {
+    background: background,
 };
 
 export default {
@@ -56,32 +61,7 @@ export default {
             textarea: JSON.stringify(input, null, '  '),
             schema: {},
             output: null,
-            components: [
-                {
-                    id: 'comp1',
-                    name: 'comp1',
-                    active: true,
-                    schema: input,
-                    data: {},
-                },
-                {
-                    id: 'comp2',
-                    name: 'Block',
-                    active: false,
-                    schema: input2,
-                    data: {
-                        width: 10,
-                        height: 10,
-                    },
-                },
-                {
-                    id: 'comp3',
-                    name: 'Block',
-                    active: false,
-                    schema: input2,
-                    data: {},
-                },
-            ]
+            components: []
         };
     },
     methods: {
@@ -99,15 +79,29 @@ export default {
             em.emit('change', value.id, value);
         },
         active(component) {
+            console.log('active', component);
             this.components.forEach(c => c.active = false);
             component.active = true;
             const schema = component.schema;
             schema.id = component.id;
             this.textarea = JSON.stringify(schema, null, '  ');
+            this.gen();
         },
         increase(component) {
             console.log(component);
         },
+        addToCanvas(type) {
+            const {schema, component} = componentsMap[type];
+            const item = {
+                id: String(Math.random()).substr(2, 5),
+                name: schema.title,
+                active: false,
+                schema: schema,
+                component: component,
+                data: {},
+            };
+            this.components.push(item);
+        }
     },
     created() {
         em.on('change', (id, data) => {

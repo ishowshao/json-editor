@@ -5,19 +5,13 @@
     </div>
 </template>
 <script>
-import StringGenerator from './StringGenerator.vue';
-import IntegerGenerator from './IntegerGenerator.vue';
-import ArrayGenerator from './ArrayGenerator.vue';
+import editorMap from './index';
 
 export default {
     props: ['schema', 'output'],
     data() {
         return {
-            map: {
-                string: StringGenerator,
-                integer: IntegerGenerator,
-                array: ArrayGenerator
-            }
+            map: editorMap,
         };
     },
     methods: {

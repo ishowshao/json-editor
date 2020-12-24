@@ -7,19 +7,13 @@
     </div>
 </template>
 <script>
-import ObjectGenerator from './ObjectGenerator.vue';
-import StringGenerator from './StringGenerator.vue';
-import IntegerGenerator from './IntegerGenerator.vue';
+import editorMap from './index';
 
 export default {
     props: ['schema'],
     data() {
         return {
-            map: {
-                object: ObjectGenerator,
-                string: StringGenerator,
-                integer: IntegerGenerator
-            },
+            map: editorMap,
             items: []
         };
     },

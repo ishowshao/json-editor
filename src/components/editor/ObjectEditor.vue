@@ -1,7 +1,7 @@
 <template>
     <div>
         <div>{{ schema.title }}</div>
-        <component v-bind:is="map[value.type]" v-for="(value, name) in schema.properties" :key="schema.id + name" :ref="name" :schema="value" :name="name"></component>
+        <component v-bind:is="map[value.format ? value.format : value.type]" v-for="(value, name) in schema.properties" :key="schema.id + name" :ref="name" :schema="value" :name="name"></component>
     </div>
 </template>
 <script>

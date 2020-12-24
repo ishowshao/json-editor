@@ -17,22 +17,20 @@
                 </div>
             </div>
         </div>
-        <!-- <div class="schema">
-            <el-input type="textarea" :rows="20" placeholder="请输入内容" v-model="textarea"> </el-input>
-            <el-button @click="gen">生成</el-button>
-        </div> -->
         <div class="form">
             <h3>表单</h3>  
             <el-form ref="form" label-width="80px">
                 <object-generator v-if="schema" ref="root" :schema="schema"></object-generator>
-                <el-form-item>
-                    <el-button @click="generateOutput">生成output</el-button>
-                </el-form-item>
             </el-form>
+            <el-button @click="generateOutput">保存</el-button>
         </div>
         <div class="output">
-            <h3>输出</h3>
+            <h3>表单数据</h3>
             <code><pre>{{output}}</pre></code>
+        </div>
+        <div class="page">
+            <h3>页面结构</h3>
+            <code><pre>{{pageData}}</pre></code>
         </div>
     </div>
 </template>
@@ -68,6 +66,16 @@ export default {
             output: null,
             components: []
         };
+    },
+    computed: {
+        pageData() {
+            return this.components.map(c => {
+                return {
+                    name: c.name,
+                    data: c.data,
+                };
+            });
+        }
     },
     methods: {
         gen() {
@@ -128,20 +136,9 @@ body {
 #app {
     display: flex;
 }
-.components, .canvas {
+#app > div {
     width: 20vw;
-}
-.schema {
-    width: 30vw;
-    padding: 10px;
     box-sizing: border-box;
-}
-.form {
-    width: 20vw;
-}
-.output {
-    padding: 0 10px;
-    width: 30vw;
 }
 .container > div {
     box-sizing: border-box;

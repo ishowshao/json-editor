@@ -6,7 +6,7 @@
                 <el-button size="small" @click="addToCanvas(`background`)">背景颜色组件</el-button>
             </div>
             <div>
-                <el-button size="small">调整宽高组件</el-button>
+                <el-button size="small" @click="addToCanvas(`size`)">调整宽高组件</el-button>
             </div>
         </div>
         <div class="canvas">
@@ -56,7 +56,7 @@ export default {
     },
     data() {
         return {
-            textarea: JSON.stringify(input, null, '  '),
+            textarea: '',
             schema: {},
             output: null,
             components: []

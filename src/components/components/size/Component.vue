@@ -3,7 +3,7 @@
 </template>
 <script>
 export default {
-    name: '调整宽高组件',
+    name: 'size',
 }
 </script>
 <style scoped>

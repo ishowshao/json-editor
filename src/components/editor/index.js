@@ -8,7 +8,7 @@ const editorMap = {
     object: ObjectEditor,
     array: ArrayEditor,
     color: ColorEditor,
-    interger: IntegerEditor,
+    integer: IntegerEditor,
     string: StringEditor,
 };
 

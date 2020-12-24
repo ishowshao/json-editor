@@ -20,7 +20,7 @@
         <div class="form">
             <h3>表单</h3>  
             <el-form ref="form" label-width="80px">
-                <object-generator v-if="schema" ref="root" :schema="schema"></object-generator>
+                <object-editor v-if="schema" ref="root" :schema="schema"></object-editor>
             </el-form>
             <el-button @click="generateOutput">保存</el-button>
         </div>
@@ -41,9 +41,9 @@ import input from '@/assets/input.json';
 import input2 from '@/assets/input2.json';
 
 import schema2output from '@/lib/output';
-import ObjectGenerator from './components/ObjectGenerator.vue';
 
 import background from './components/canvas/background';
+import ObjectEditor from './components/editor/ObjectEditor.vue';
 
 const schemas = {
     comp1: input,
@@ -57,7 +57,7 @@ const componentsMap = {
 export default {
     name: 'App',
     components: {
-        ObjectGenerator
+        ObjectEditor,
     },
     data() {
         return {

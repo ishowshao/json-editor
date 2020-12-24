@@ -3,7 +3,7 @@
         <div class="components">
             <h3>组件列表</h3>
             <div>
-                <el-button size="small" @click="addToCanvas(`background`)">背景颜色组价</el-button>
+                <el-button size="small" @click="addToCanvas(`background`)">背景颜色组件</el-button>
             </div>
             <div>
                 <el-button size="small">调整宽高组件</el-button>

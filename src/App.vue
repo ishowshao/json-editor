@@ -1,23 +1,28 @@
 <template>
     <div id="app">
-        <div class="canvas">
-            <div>添加组件：</div>
+        <div class="components">
+            <h3>组件列表</h3>
             <div>
                 <el-button size="small" @click="addToCanvas(`background`)">背景颜色组价</el-button>
+            </div>
+            <div>
                 <el-button size="small">调整宽高组件</el-button>
             </div>
-            <h4>画布</h4>
+        </div>
+        <div class="canvas">
+            <h3>画布</h3>
             <div class="container">
                 <div v-for="comp in components" :key="comp.id" :class="{active: comp.active}" @click="active(comp)">
                     <component v-bind:is="comp.component"></component>
                 </div>
             </div>
         </div>
-        <div class="schema">
+        <!-- <div class="schema">
             <el-input type="textarea" :rows="20" placeholder="请输入内容" v-model="textarea"> </el-input>
             <el-button @click="gen">生成</el-button>
-        </div>
+        </div> -->
         <div class="form">
+            <h3>表单</h3>  
             <el-form ref="form" label-width="80px">
                 <object-generator v-if="schema" ref="root" :schema="schema"></object-generator>
                 <el-form-item>
@@ -26,7 +31,7 @@
             </el-form>
         </div>
         <div class="output">
-            <h4>output</h4>
+            <h3>输出</h3>
             <code><pre>{{output}}</pre></code>
         </div>
     </div>
@@ -123,8 +128,8 @@ body {
 #app {
     display: flex;
 }
-.canvas {
-    width: 20vw
+.components, .canvas {
+    width: 20vw;
 }
 .schema {
     width: 30vw;

@@ -37,21 +37,16 @@
 
 <script>
 import em from '@/lib/em';
-import input from '@/assets/input.json';
-import input2 from '@/assets/input2.json';
 
 import schema2output from '@/lib/output';
 
-import background from './components/canvas/background';
+import background from './components/components/background/';
+import size from './components/components/size/';
 import ObjectEditor from './components/editor/ObjectEditor.vue';
 
-const schemas = {
-    comp1: input,
-    comp2: input2,
-};
-
 const componentsMap = {
-    background: background,
+    background,
+    size,
 };
 
 export default {

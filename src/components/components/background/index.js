@@ -1,9 +1,9 @@
-import schema from './background.json';
-import Background from './Background.vue';
+import schema from './schema.json';
+import Component from './Component.vue';
 
 const component = {
     schema,
-    component: Background
+    component: Component,
 };
 
 export default component;

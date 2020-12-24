@@ -1,6 +1,6 @@
 <template>
     <el-form-item :label="name" :key="name">
-        <el-input v-model="value"></el-input>
+        <el-color-picker v-model="value"></el-color-picker>
     </el-form-item>
 </template>
 <script>

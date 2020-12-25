@@ -19,8 +19,8 @@
         </div>
         <div class="form">
             <h3>表单</h3>  
-            <el-form ref="form" label-width="80px">
-                <object-editor v-if="schema" ref="root" :schema="schema"></object-editor>
+            <el-form v-for="comp in components" :ref="`form${comp.id}`" :key="comp.id" label-width="80px">
+                <object-editor v-if="comp.schema" :ref="`root${comp.id}`" :schema="comp.schema" :instanceData="comp.data"></object-editor>
             </el-form>
             <el-button @click="generateOutput">保存</el-button>
         </div>
@@ -73,10 +73,10 @@ export default {
         }
     },
     methods: {
-        gen() {
+        gen(component) {
             this.schema = null;
             this.$nextTick(() => {
-                this.schema = JSON.parse(this.textarea);
+                this.schema = component.schema;
             });
         },
         generateOutput() {
@@ -93,7 +93,7 @@ export default {
             const schema = component.schema;
             schema.id = component.id;
             this.textarea = JSON.stringify(schema, null, '  ');
-            this.gen();
+            this.gen(component);
         },
         increase(component) {
             console.log(component);

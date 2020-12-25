@@ -1,14 +1,14 @@
 <template>
     <div>
         <div>{{ schema.title }}</div>
-        <component v-bind:is="map[value.format ? value.format : value.type]" v-for="(value, name) in schema.properties" :key="schema.id + name" :ref="name" :schema="value" :name="name"></component>
+        <component v-bind:is="map[value.format ? value.format : value.type]" v-for="(value, name) in schema.properties" :key="schema.id + name" :ref="name" :schema="value" :name="name" :instanceData="instanceData[name]"></component>
     </div>
 </template>
 <script>
 import editorMap from './index';
 
 export default {
-    props: ['schema', 'output'],
+    props: ['schema', 'instanceData'],
     data() {
         return {
             map: editorMap,

@@ -1,7 +1,7 @@
 <template>
     <div>
         <div>Array {{ schema.title }}</div>
-        <component v-bind:is="map[schema.items.type]" v-for="(item, index) in items" :key="index" :ref="index" :schema="schema.items" :name="schema.items.title"></component>
+        <component v-bind:is="map[schema.items.type]" v-for="(item, index) in items" :key="index" :ref="index" :schema="schema.items" :name="schema.items.title" :instanceData="instanceData[index]"></component>
         <el-button @click="addItem">+</el-button>
         <el-button>-</el-button>
     </div>
@@ -10,7 +10,7 @@
 import editorMap from './index';
 
 export default {
-    props: ['schema'],
+    props: ['schema', 'instanceData'],
     data() {
         return {
             map: editorMap,

@@ -5,20 +5,15 @@
 </template>
 <script>
 export default {
-    props: ['schema', 'name'],
+    props: ['schema', 'name', 'instanceData'],
     data() {
         return {
             value: null
         };
     },
     created() {
-        this.value = this.schema.default;
+        this.value = this.instanceData || this.schema.default || null;
     },
-    // watch: {
-    //     value(newValue) {
-    //         this.schema.value = Number(newValue);
-    //     }
-    // },
     methods: {
         getValue() {
             return this.value;

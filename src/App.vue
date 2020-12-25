@@ -19,7 +19,7 @@
         </div>
         <div class="form">
             <h3>表单</h3>  
-            <el-form v-for="comp in components" :ref="`form${comp.id}`" :key="comp.id" label-width="80px">
+            <el-form v-show="comp.active" v-for="comp in components" :ref="`form${comp.id}`" :key="comp.id" label-width="80px">
                 <object-editor v-if="comp.schema" :ref="`root${comp.id}`" :schema="comp.schema" :instanceData="comp.data"></object-editor>
             </el-form>
             <el-button @click="generateOutput">保存</el-button>

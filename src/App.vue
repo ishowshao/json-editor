@@ -13,7 +13,7 @@
             <h3>画布</h3>
             <div class="container">
                 <div v-for="comp in components" :key="comp.id" :class="{active: comp.active}" @click="active(comp)">
-                    <component v-bind:is="comp.component"></component>
+                    <component v-bind:is="comp.component" :config="comp.data"></component>
                 </div>
             </div>
         </div>
@@ -116,7 +116,8 @@ export default {
             console.log(id, 'changed', data);
             this.components.forEach(comp => {
                 if (comp.id === id) {
-                    Object.assign(comp.data, data);
+                    // Object.assign(comp.data, data);
+                    comp.data = data;
                 }
             });
         });

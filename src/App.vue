@@ -106,7 +106,9 @@ export default {
                 active: false,
                 schema: schema,
                 component: component,
-                data: {},
+                data: {
+                    color: '#00ff00'
+                },
             };
             this.components.push(item);
         }

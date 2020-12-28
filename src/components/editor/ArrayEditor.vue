@@ -1,7 +1,7 @@
 <template>
     <div>
         <div>Array {{ schema.title }}</div>
-        <component v-bind:is="map[schema.items.type]" v-for="(item, index) in items" :key="index" :ref="index" :schema="schema.items" :name="schema.items.title" :instanceData="instanceData[index]"></component>
+        <component v-bind:is="map[schema.items.type]" v-for="(item, index) in items" :key="index" :ref="index" :schema="schema.items" :name="schema.items.title" :instanceData="instanceData[index]" @change="onChange"></component>
         <el-button @click="addItem">+</el-button>
         <el-button>-</el-button>
     </div>
@@ -29,6 +29,9 @@ export default {
                 return this.$refs[index][0].getValue();
             });
             return value;
+        },
+        onChange() {
+            this.$emit('change');
         },
     }
 };

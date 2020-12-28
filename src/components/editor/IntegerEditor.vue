@@ -1,6 +1,6 @@
 <template>
     <el-form-item :label="name" :key="name">
-        <el-input v-model="value" type="number"></el-input>
+        <el-input v-model="value" type="number" @change="onChange"></el-input>
     </el-form-item>
 </template>
 <script>
@@ -17,6 +17,9 @@ export default {
     methods: {
         getValue() {
             return this.value;
+        },
+        onChange() {
+            this.$emit('change');
         },
     }
 };

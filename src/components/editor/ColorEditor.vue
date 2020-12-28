@@ -1,6 +1,6 @@
 <template>
     <el-form-item :label="name" :key="name">
-        <el-color-picker v-model="value"></el-color-picker>
+        <el-color-picker v-model="value" @change="onChange"></el-color-picker>
     </el-form-item>
 </template>
 <script>
@@ -17,6 +17,9 @@ export default {
     methods: {
         getValue() {
             return this.value;
+        },
+        onChange() {
+            this.$emit('change');
         },
     }
 };

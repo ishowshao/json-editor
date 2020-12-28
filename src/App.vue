@@ -20,9 +20,9 @@
         <div class="form">
             <h3>表单</h3>  
             <el-form v-show="comp.active" v-for="comp in components" :ref="`form${comp.id}`" :key="comp.id" label-width="80px">
-                <object-editor v-if="comp.schema" :ref="`root${comp.id}`" :schema="comp.schema" :instanceData="comp.data"></object-editor>
+                <object-editor v-if="comp.schema" :ref="`root${comp.id}`" :schema="comp.schema" :instanceData="comp.data" @change="onChange(comp)"></object-editor>
+                <el-button @click="save(comp)">保存</el-button>
             </el-form>
-            <el-button @click="generateOutput">保存</el-button>
         </div>
         <div class="output">
             <h3>表单数据</h3>
@@ -79,12 +79,19 @@ export default {
                 this.schema = component.schema;
             });
         },
-        generateOutput() {
-            const value = this.$refs['root'].getValue();
+        save(component) {
+            const value = this.$refs[`root${component.id}`][0].getValue();
             console.log(value);
             this.output = value;
             // emit
-            em.emit('change', value.id, value);
+            em.emit('change', component.id, value);
+        },
+        onChange(component) {
+            const value = this.$refs[`root${component.id}`][0].getValue();
+            console.log(value);
+            this.output = value;
+            // emit
+            em.emit('change', component.id, value);
         },
         active(component) {
             console.log('active', component);

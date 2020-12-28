@@ -107,10 +107,10 @@ export default {
             console.log(component);
         },
         addToCanvas(type) {
-            const {schema, component} = componentsMap[type];
+            const {schema, component, name} = componentsMap[type];
             const item = {
                 id: String(Math.random()).substr(2, 5),
-                name: schema.title,
+                name: name,
                 active: false,
                 schema: schema,
                 component: component,

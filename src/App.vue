@@ -31,6 +31,7 @@
         <div class="page">
             <h3>页面结构</h3>
             <code><pre>{{pageData}}</pre></code>
+            <el-button @click="savePageData">保存</el-button>
         </div>
     </div>
 </template>
@@ -118,7 +119,10 @@ export default {
                 },
             };
             this.components.push(item);
-        }
+        },
+        savePageData() {
+            window.localStorage.setItem('data', JSON.stringify(this.pageData));
+        },
     },
     created() {
         em.on('change', (id, data) => {

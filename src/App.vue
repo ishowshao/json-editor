@@ -114,9 +114,7 @@ export default {
                 active: false,
                 schema: schema,
                 component: component,
-                data: {
-                    color: '#00ff00'
-                },
+                data: {},
             };
             this.components.push(item);
         },
@@ -134,6 +132,24 @@ export default {
                 }
             });
         });
+    },
+    mounted() {
+        let pageData = window.localStorage.getItem('data');
+        if (pageData) {
+            pageData = JSON.parse(pageData);
+            pageData.forEach(comp => {
+                const {schema, component, name} = componentsMap[comp.name];
+                const item = {
+                    id: String(Math.random()).substr(2, 5),
+                    name: name,
+                    active: false,
+                    schema: schema,
+                    component: component,
+                    data: comp.data,
+                };
+                this.components.push(item);
+            });
+        }
     }
 };
 </script>

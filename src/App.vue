@@ -138,7 +138,7 @@ export default {
         },
         addBlock(type) {
             const {schema, component, name} = componentsMap[type];
-            this.page.blocks.push({
+            const block = {
                 id: String(Math.random()).substr(2, 5),
                 name: name,
                 active: false,
@@ -146,23 +146,30 @@ export default {
                 component: component,
                 components: [],
                 data: {},
-            });
+            };
+            this.page.blocks.push(block);
+            return block;
         },
-        addComponent(type) {
-            let block = this.page.blocks.find(block => block.active);
+        addComponent(type, block = null) {
             if (!block) {
-                this.addBlock('block');
-                block = this.page.blocks[this.page.blocks.length - 1];
+                block = this.page.blocks.find(block => block.active);
+                if (!block) {
+                    this.addBlock('block');
+                    block = this.page.blocks[this.page.blocks.length - 1];
+                }
             }
+
             const {schema, component, name} = componentsMap[type];
-            block.components.push({
+            const comp = {
                 id: String(Math.random()).substr(2, 5),
                 name: name,
                 active: false,
                 schema: schema,
                 component: component,
                 data: {},
-            });
+            };
+            block.components.push(comp);
+            return comp;
         },
         savePageData() {
             window.localStorage.setItem('data', JSON.stringify(this.pageData));
@@ -194,17 +201,13 @@ export default {
         let pageData = window.localStorage.getItem('data');
         if (pageData) {
             pageData = JSON.parse(pageData);
-            pageData.forEach(comp => {
-                const {schema, component, name} = componentsMap[comp.name];
-                const item = {
-                    id: String(Math.random()).substr(2, 5),
-                    name: name,
-                    active: false,
-                    schema: schema,
-                    component: component,
-                    data: comp.data,
-                };
-                this.components.push(item);
+            pageData.blocks.forEach(block => {
+                const b = this.addBlock(block.name);
+                b.data = block.data;
+                block.components.forEach(c => {
+                    const comp = this.addComponent(c.name, b);
+                    comp.data = c.data;
+                });
             });
         }
     }

@@ -136,19 +136,27 @@ export default {
         increase(component) {
             console.log(component);
         },
-        addBlock(type) {
-            const {schema, component, name} = componentsMap[type];
-            const block = {
+        addBlock(block) {
+            let name, data;
+            if (typeof block === 'string') {
+                name = block;
+                data = {};
+            } else {
+                name = block.name;
+                data = block.data;
+            }
+            const {schema, component} = componentsMap[name];
+            const item = {
                 id: String(Math.random()).substr(2, 5),
                 name: name,
                 active: false,
                 schema: schema,
                 component: component,
                 components: [],
-                data: {},
+                data: data,
             };
-            this.page.blocks.push(block);
-            return block;
+            this.page.blocks.push(item);
+            return item;
         },
         addComponent(type, block = null) {
             if (!block) {

@@ -47,6 +47,7 @@
 
 <script>
 import em from '@/lib/em';
+import id from '@/lib/id';
 
 import schema2output from '@/lib/output';
 
@@ -141,14 +142,13 @@ export default {
             if (typeof block === 'string') {
                 name = block;
                 data = {};
-                components = [];
             } else {
                 name = block.name;
                 data = block.data;
             }
             const {schema, component} = componentsMap[name];
             const item = {
-                id: String(Math.random()).substr(2, 5),
+                id: id(),
                 name: name,
                 active: false,
                 schema: schema,
@@ -183,7 +183,7 @@ export default {
 
             const {schema, component} = componentsMap[name];
             const item = {
-                id: String(Math.random()).substr(2, 5),
+                id: id(),
                 name: name,
                 active: false,
                 schema: schema,

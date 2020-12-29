@@ -16,16 +16,16 @@
         <div class="canvas">
             <h3>画布</h3>
             <div class="container">
-                <div v-for="comp in components" :key="comp.id" :class="{active: comp.active}" @click="active(comp)">
-                    <component v-bind:is="comp.component" :config="comp.data"></component>
+                <div v-for="block in page.blocks" :key="block.id" :class="{active: block.active}" @click="active(block)">
+                    <component v-bind:is="block.component" :config="block.data" :components="block.components"></component>
                 </div>
             </div>
         </div>
         <div class="form">
             <h3>表单</h3>  
-            <el-form v-show="comp.active" v-for="comp in components" :ref="`form${comp.id}`" :key="comp.id" label-width="80px">
-                <object-editor v-if="comp.schema" :ref="`root${comp.id}`" :schema="comp.schema" :instanceData="comp.data" @change="onChange(comp)"></object-editor>
-                <el-button @click="save(comp)">保存</el-button>
+            <el-form v-show="form.active" v-for="form in forms" :ref="`form${form.id}`" :key="form.id" label-width="80px">
+                <object-editor v-if="form.schema" :ref="`root${form.id}`" :schema="form.schema" :instanceData="form.data" @change="onChange(form)"></object-editor>
+                <el-button @click="save(form)">保存</el-button>
             </el-form>
         </div>
         <div class="output">
@@ -72,13 +72,30 @@ export default {
     },
     computed: {
         pageData() {
-            return this.page;
+            const data = {};
+            data.blocks = this.page.blocks.map(block => {
+                return {
+                    name: block.name,
+                    components: [],
+                    data: block.data,
+                };
+            });
+            return data;
             // return this.components.map(c => {
             //     return {
             //         name: c.name,
             //         data: c.data,
             //     };
             // });
+        },
+        forms() {
+            const result = [];
+            const blocks = this.page.blocks;
+            result.push(...blocks);
+            for (let i = 0; i < blocks.length; i++) {
+                result.push(...blocks[i].components);
+            }
+            return result;
         }
     },
     methods: {
@@ -114,15 +131,15 @@ export default {
         },
         addBlock(type) {
             const {schema, component, name} = componentsMap[type];
-            const item = {
+            this.page.blocks.push({
                 id: String(Math.random()).substr(2, 5),
                 name: name,
                 active: false,
                 schema: schema,
                 component: component,
                 components: [],
-            };
-            this.components.push(item);
+                data: {},
+            });
         },
         addComponent(block, type) {
             const {schema, component, name} = componentsMap[type];
@@ -189,5 +206,9 @@ body {
 }
 .container .active {
     border: 1px solid #cccccc;
+}
+
+.x-component {
+    position: absolute;
 }
 </style>

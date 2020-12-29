@@ -3,14 +3,14 @@
         <div class="components">
             <h3>模块列表</h3>
             <div>
-                <el-button size="small" @click="addToCanvas(`background`)">空白模块</el-button>
+                <el-button size="small" @click="addBlock(`block`)">空白模块</el-button>
             </div>
             <h3>组件列表</h3>
             <div>
-                <el-button size="small" @click="addToCanvas(`background`)">背景颜色组件</el-button>
+                <el-button size="small" @click="addComponent(`background`)">背景颜色组件</el-button>
             </div>
             <div>
-                <el-button size="small" @click="addToCanvas(`size`)">调整宽高组件</el-button>
+                <el-button size="small" @click="addComponent(`size`)">调整宽高组件</el-button>
             </div>
         </div>
         <div class="canvas">
@@ -45,11 +45,13 @@ import em from '@/lib/em';
 
 import schema2output from '@/lib/output';
 
+import block from './components/components/block/';
 import background from './components/components/background/';
 import size from './components/components/size/';
 import ObjectEditor from './components/editor/ObjectEditor.vue';
 
 const componentsMap = {
+    block,
     background,
     size,
 };
@@ -63,17 +65,20 @@ export default {
         return {
             schema: {},
             output: null,
-            components: []
+            page: {
+                blocks: [],
+            },
         };
     },
     computed: {
         pageData() {
-            return this.components.map(c => {
-                return {
-                    name: c.name,
-                    data: c.data,
-                };
-            });
+            return this.page;
+            // return this.components.map(c => {
+            //     return {
+            //         name: c.name,
+            //         data: c.data,
+            //     };
+            // });
         }
     },
     methods: {
@@ -108,7 +113,19 @@ export default {
         increase(component) {
             console.log(component);
         },
-        addToCanvas(type) {
+        addBlock(type) {
+            const {schema, component, name} = componentsMap[type];
+            const item = {
+                id: String(Math.random()).substr(2, 5),
+                name: name,
+                active: false,
+                schema: schema,
+                component: component,
+                components: [],
+            };
+            this.components.push(item);
+        },
+        addComponent(block, type) {
             const {schema, component, name} = componentsMap[type];
             const item = {
                 id: String(Math.random()).substr(2, 5),

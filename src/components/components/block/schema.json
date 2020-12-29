@@ -1,0 +1,16 @@
+{
+    "title": "空白模块",
+    "type": "object",
+    "properties": {
+        "bgColor": {
+            "type": "string",
+            "format": "color",
+            "title": "模块背景色",
+            "default": "#ffffff"
+        },
+        "bgImage": {
+            "type": "string",
+            "title": "模块背景图"
+        }
+    }
+}

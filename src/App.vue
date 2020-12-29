@@ -81,17 +81,16 @@ export default {
             data.blocks = this.page.blocks.map(block => {
                 return {
                     name: block.name,
-                    components: [],
+                    components: block.components.map(c => {
+                        return {
+                            name: c.name,
+                            data: c.data,
+                        };
+                    }),
                     data: block.data,
                 };
             });
             return data;
-            // return this.components.map(c => {
-            //     return {
-            //         name: c.name,
-            //         data: c.data,
-            //     };
-            // });
         },
         forms() {
             const result = [];

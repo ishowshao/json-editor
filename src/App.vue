@@ -171,12 +171,23 @@ export default {
     created() {
         em.on('change', (id, data) => {
             console.log(id, 'changed', data);
-            this.components.forEach(comp => {
-                if (comp.id === id) {
-                    // Object.assign(comp.data, data);
-                    comp.data = data;
+            const blocks = this.page.blocks;
+            for (let i = 0; i < blocks.length; i++) {
+                const block = blocks[i];
+                if (block.id === id) {
+                    block.data = data;
+                    return;
+                } else {
+                    const components = block.components;
+                    for (let j = 0; j < components.length; j++) {
+                        const c = components[j];
+                        if (c.id === id) {
+                            c.data = data;
+                            return;
+                        }
+                    }
                 }
-            });
+            }
         });
     },
     mounted() {

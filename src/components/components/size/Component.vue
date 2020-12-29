@@ -1,5 +1,5 @@
 <template>
-    <div class="x-component cc-size" :style="{width: `${width}px`, height: `${height}px`}">
+    <div class="cc-size" :style="{width: `${width}px`, height: `${height}px`}">
         <h6>调整大小</h6>
         <el-button size="mini" @click="expand">变大</el-button>
     </div>

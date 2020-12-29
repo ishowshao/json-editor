@@ -1,9 +1,9 @@
 <template>
-    <div class="x-component cc-background" :style="{backgroundColor: config.color}">背景颜色组件</div>
+    <div class="cc-background" :style="{backgroundColor: instanceData.color}">背景颜色组件</div>
 </template>
 <script>
 export default {
-    props: ['config'],
+    props: ['instanceData'],
 }
 </script>
 <style scoped>

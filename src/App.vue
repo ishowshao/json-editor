@@ -1,6 +1,10 @@
 <template>
     <div id="app">
         <div class="components">
+            <h3>模块列表</h3>
+            <div>
+                <el-button size="small" @click="addToCanvas(`background`)">空白模块</el-button>
+            </div>
             <h3>组件列表</h3>
             <div>
                 <el-button size="small" @click="addToCanvas(`background`)">背景颜色组件</el-button>
@@ -57,7 +61,6 @@ export default {
     },
     data() {
         return {
-            textarea: '',
             schema: {},
             output: null,
             components: []
@@ -100,7 +103,6 @@ export default {
             component.active = true;
             const schema = component.schema;
             schema.id = component.id;
-            this.textarea = JSON.stringify(schema, null, '  ');
             this.gen(component);
         },
         increase(component) {

@@ -121,10 +121,12 @@ export default {
         },
         active(component) {
             console.log('active', component);
-            this.components.forEach(c => c.active = false);
-            component.active = true;
-            const schema = component.schema;
-            this.gen(component);
+            if (!component.active) {
+                this.forms.forEach(c => c.active = false);
+                component.active = true;
+                const schema = component.schema;
+                this.gen(component);
+            }
         },
         increase(component) {
             console.log(component);

@@ -141,6 +141,7 @@ export default {
             if (typeof block === 'string') {
                 name = block;
                 data = {};
+                components = [];
             } else {
                 name = block.name;
                 data = block.data;
@@ -156,9 +157,22 @@ export default {
                 data: data,
             };
             this.page.blocks.push(item);
+            if (typeof block !== 'string') {
+                block.components.forEach(component => {
+                    this.addComponent(component, item);
+                });
+            }
             return item;
         },
-        addComponent(type, block = null) {
+        addComponent(comp, block = null) {
+            let name, data;
+            if (typeof comp === 'string') {
+                name = comp;
+                data = {};
+            } else {
+                name = comp.name;
+                data = comp.data;
+            }
             if (!block) {
                 block = this.page.blocks.find(block => block.active);
                 if (!block) {
@@ -167,17 +181,16 @@ export default {
                 }
             }
 
-            const {schema, component, name} = componentsMap[type];
-            const comp = {
+            const {schema, component} = componentsMap[name];
+            const item = {
                 id: String(Math.random()).substr(2, 5),
                 name: name,
                 active: false,
                 schema: schema,
                 component: component,
-                data: {},
+                data: data,
             };
-            block.components.push(comp);
-            return comp;
+            block.components.push(item);
         },
         savePageData() {
             window.localStorage.setItem('data', JSON.stringify(this.pageData));
@@ -210,12 +223,7 @@ export default {
         if (pageData) {
             pageData = JSON.parse(pageData);
             pageData.blocks.forEach(block => {
-                const b = this.addBlock(block.name);
-                b.data = block.data;
-                block.components.forEach(c => {
-                    const comp = this.addComponent(c.name, b);
-                    comp.data = c.data;
-                });
+                this.addBlock(block);
             });
         }
     }

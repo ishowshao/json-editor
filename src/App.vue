@@ -107,7 +107,6 @@ export default {
             this.components.forEach(c => c.active = false);
             component.active = true;
             const schema = component.schema;
-            schema.id = component.id;
             this.gen(component);
         },
         increase(component) {

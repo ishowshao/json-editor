@@ -90,6 +90,7 @@ export default {
             return data;
         },
         forms() {
+            console.log('forms active')
             const result = [];
             const blocks = this.page.blocks;
             result.push(...blocks);

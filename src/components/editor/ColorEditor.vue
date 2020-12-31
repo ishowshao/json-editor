@@ -5,6 +5,7 @@
 </template>
 <script>
 export default {
+    name: 'color-editor',
     props: ['schema', 'name', 'instanceData'],
     data() {
         return {

@@ -5,6 +5,7 @@
 </template>
 <script>
 export default {
+    name: 'string-editor',
     props: ['schema', 'name', 'instanceData'],
     data() {
         return {

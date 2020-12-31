@@ -1,15 +1,17 @@
 <template>
     <div>
         <div>Array {{ schema.title }}</div>
-        <component v-bind:is="map[schema.items.type]" v-for="(item, index) in items" :key="index" :ref="index" :schema="schema.items" :name="schema.items.title" :instanceData="instanceData[index]" @change="onChange"></component>
+        <!-- <component v-bind:is="map[schema.items.type]" v-for="(item, index) in items" :key="index" :ref="index" :schema="schema.items" :name="schema.items.title" :instanceData="instanceData[index]" @change="onChange"></component> -->
+        <component v-bind:is="schema.items.type + '-editor'" v-for="(item, index) in items" :key="index" :ref="index" :schema="schema.items" :name="schema.items.title" :instanceData="instanceData[index]" @change="onChange"></component>
         <el-button @click="addItem">+</el-button>
         <el-button>-</el-button>
     </div>
 </template>
 <script>
-import editorMap from './index';
+// import editorMap from './index';
 
 export default {
+    name: 'array-editor',
     props: ['schema', 'instanceData'],
     data() {
         return {

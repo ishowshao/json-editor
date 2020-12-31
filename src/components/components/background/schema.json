@@ -7,6 +7,28 @@
             "format": "color",
             "title": "背景色",
             "default": "#ffffff"
+        },
+        "layout": {
+            "title": "布局",
+            "type": "object",
+            "properties": {
+                "left": {
+                    "type": "integer",
+                    "title": "横轴",
+                    "default": 0
+                },
+                "top": {
+                    "type": "integer",
+                    "title": "纵轴",
+                    "default": 0
+                }
+            }
+        },
+        "color3": {
+            "type": "string",
+            "format": "color",
+            "title": "背景色",
+            "default": "#ffffff"
         }
     }
 }

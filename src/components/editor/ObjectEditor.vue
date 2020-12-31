@@ -1,17 +1,19 @@
 <template>
     <div>
         <div>{{ schema.title }}</div>
-        <component v-bind:is="map[value.format ? value.format : value.type]" v-for="(value, name) in schema.properties" :key="schema.id + name" :ref="name" :schema="value" :name="name" :instanceData="instanceData[name]" @change="onChange"></component>
+        <component v-bind:is="value.type + '-editor'" v-for="(value, name) in schema.properties" :key="name + genId()"  :ref="name" :schema="value" :name="name" :instanceData="instanceData ? instanceData[name] : null" @change="onChange"></component>
     </div>
 </template>
 <script>
-import editorMap from './index';
+import id from '../../lib/id';
 
 export default {
+    name: 'object-editor',
     props: ['schema', 'instanceData'],
     data() {
         return {
-            map: editorMap,
+            // map: editorMap,
+            i: 0,
         };
     },
     methods: {
@@ -29,9 +31,12 @@ export default {
         onChange() {
             this.$emit('change');
         },
+        genId() {
+            return id();
+        }
     },
     created() {
-        console.log('object created');
+        console.log('object created', this.schema);
     }
 };
 </script>

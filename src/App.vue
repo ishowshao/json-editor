@@ -54,7 +54,6 @@ import schema2output from '@/lib/output';
 import block from './components/components/block/';
 import background from './components/components/background/';
 import size from './components/components/size/';
-import ObjectEditor from './components/editor/ObjectEditor.vue';
 
 const componentsMap = {
     block,
@@ -64,9 +63,6 @@ const componentsMap = {
 
 export default {
     name: 'App',
-    components: {
-        ObjectEditor,
-    },
     data() {
         return {
             schema: {},

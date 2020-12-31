@@ -23,12 +23,6 @@
                     "default": 0
                 }
             }
-        },
-        "color3": {
-            "type": "string",
-            "format": "color",
-            "title": "背景色",
-            "default": "#ffffff"
         }
     }
 }

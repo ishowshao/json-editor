@@ -1,7 +1,7 @@
 <template>
     <div>
         <div>{{ schema.title }}</div>
-        <component v-bind:is="value.type + '-editor'" v-for="(value, name) in schema.properties" :key="name + genId()"  :ref="name" :schema="value" :name="name" :instanceData="instanceData ? instanceData[name] : null" @change="onChange"></component>
+        <component v-bind:is="(value.format ? value.format : value.type) + '-editor'" v-for="(value, name) in schema.properties" :key="name + genId()"  :ref="name" :schema="value" :name="name" :instanceData="instanceData ? instanceData[name] : null" @change="onChange"></component>
     </div>
 </template>
 <script>

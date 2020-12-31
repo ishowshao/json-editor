@@ -15,6 +15,11 @@ export default {
     created() {
         this.value = this.instanceData || this.schema.default || null;
     },
+    watch: {
+        instanceData(newValue) {
+            this.value = newValue;
+        }
+    },
     methods: {
         getValue() {
             return this.value;

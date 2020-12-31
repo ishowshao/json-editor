@@ -1,7 +1,7 @@
 <template>
     <div class="block" :style="{backgroundColor: instanceData.bgColor}">
         <div v-if="components.length === 0">empty block</div>
-        <div v-else v-for="component in components" :key="component.id" :class="{active: component.active}" :style="{top: `${component.data.layout.top}px`, left: `${component.data.layout.left}px`}" @click.stop="active(component)" @mousedown="onMouseDown" @mouseup="onMouseUp" @mousemove.prevent="onMouseMove" class="x-component">
+        <div v-else v-for="component in components" :key="component.id" :class="{active: component.active}" :style="{top: `${component.data.layout.top}px`, left: `${component.data.layout.left}px`}" @click.stop="active(component)" @mousedown="(e) => {onMouseDown(e, component)}" @mouseup="onMouseUp" @mousemove.prevent="onMouseMove" class="x-component">
             <component v-bind:is="component.component" :componentId="component.id" :instanceData="component.data"></component>
         </div>
     </div>
@@ -11,6 +11,7 @@ export default {
     props: ['blockId', 'instanceData', 'components'],
     data() {
         return {
+            targetComponent: null,
             target: null,
             clientX: null,
             clientY: null,
@@ -22,22 +23,25 @@ export default {
         active(component) {
             this.$emit('component-active', component, this.blockId);
         },
-        onMouseDown(e) {
-            console.log('mousedown', e);
+        onMouseDown(e, component) {
+            console.log('mousedown', e, component);
+            this.targetComponent = component;
             this.target = e.target;
             this.clientX = e.clientX;
             this.clientY = e.clientY;
-            this.top = parseInt(this.target.parentNode.style.top) || 0;
-            this.left = parseInt(this.target.parentNode.style.left) || 0;
+            this.top = Number(this.targetComponent.data.layout.top) || 0;
+            this.left = Number(this.targetComponent.data.layout.left) || 0;
         },
-        onMouseUp() {
+        onMouseUp(e) {
             this.target = null;
+            this.targetComponent.data.layout.top = this.top + e.clientY - this.clientY;
+            this.targetComponent.data.layout.left = this.left + e.clientX - this.clientX;
         },
         onMouseMove(e) {
             if (this.target) {
                 // console.log(this.target);
-                this.target.parentNode.style.top = (this.top + e.clientY - this.clientY) + `px`;
-                this.target.parentNode.style.left = (this.left + e.clientX - this.clientX) + `px`;
+                this.targetComponent.data.layout.top = this.top + e.clientY - this.clientY;
+                this.targetComponent.data.layout.left = this.left + e.clientX - this.clientX;
             }
         },
     }

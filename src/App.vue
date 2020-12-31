@@ -49,8 +49,6 @@
 import em from '@/lib/em';
 import id from '@/lib/id';
 
-import schema2output from '@/lib/output';
-
 import block from './components/components/block/';
 import background from './components/components/background/';
 import size from './components/components/size/';

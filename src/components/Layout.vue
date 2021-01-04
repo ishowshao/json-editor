@@ -1,6 +1,6 @@
 <template>
     <div
-        :style="{top: `${instanceData.layout.top}px`, left: `${instanceData.layout.left}px`}"
+        :style="{top: `${instanceData.layout.top}px`, left: `${instanceData.layout.left}px`, width: `${instanceData.layout.width}px`}"
         @mousedown="onMouseDown"
         @mouseup="onMouseUp"
         @mousemove.prevent="onMouseMove"

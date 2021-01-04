@@ -20,6 +20,11 @@
                     "type": "integer",
                     "title": "纵轴",
                     "default": 0
+                },
+                "width": {
+                    "type": "integer",
+                    "title": "宽度",
+                    "default": 100
                 }
             }
         }

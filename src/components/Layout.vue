@@ -8,6 +8,8 @@
         :class="{active: component.active}"
         class="x-component">
         <slot></slot>
+        <div class="handle handle-l"></div>
+        <div class="handle handle-r"></div>
     </div>
 </template>
 <script>
@@ -61,6 +63,25 @@ export default {
     top: 0;
     left: 0;
     bottom: 0;
+    right: 0;
+}
+.handle {
+    display: none;
+    position: absolute;
+    width: 7px;
+    height: 7px;
+    box-sizing: border-box;
+    border: 1px solid black;
+}
+.active .handle {
+    display: block;
+}
+.handle-l {
+    top: 50%;
+    left: 0;
+}
+.handle-r {
+    top: 50%;
     right: 0;
 }
 </style>

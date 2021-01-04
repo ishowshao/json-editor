@@ -1,46 +1,50 @@
 <template>
     <div id="app">
-        <div class="components">
-            <h3>模块列表</h3>
-            <div>
-                <el-button size="small" @click="addBlock(`block`)">空白模块</el-button>
+        <div class="header">
+            <div class="logo">
+                <span>建站</span>
             </div>
-            <h3>组件列表</h3>
-            <div>
-                <el-button size="small" @click="addComponent(`background`)">背景颜色组件</el-button>
-            </div>
-            <div>
-                <el-button size="small" @click="addComponent(`size`)">调整宽高组件</el-button>
+            <div class="actions">
+                <el-button type="primary" @click="savePageData">保存</el-button>
             </div>
         </div>
-        <div class="canvas">
-            <h3>画布</h3>
-            <div class="container">
-                <div v-for="block in page.blocks" :key="block.id" :class="{active: block.active, 'has-active': block.components.find(c => c.active)}" class="block-container" @click="active(block)">
-                    <component
-                        v-bind:is="block.component"
-                        :blockId="block.id"
-                        :instanceData="block.data"
-                        :components="block.components" @component-active="onComponentActive"></component>
+        <div class="main">
+            <div class="components">
+                <h3>模块列表</h3>
+                <div>
+                    <el-button size="small" @click="addBlock(`block`)">空白模块</el-button>
+                </div>
+                <h3>组件列表</h3>
+                <div>
+                    <el-button size="small" @click="addComponent(`background`)">背景颜色组件</el-button>
+                </div>
+                <div>
+                    <el-button size="small" @click="addComponent(`size`)">调整宽高组件</el-button>
                 </div>
             </div>
-        </div>
-        <div class="form">
-            <h3>表单</h3>  
-            <el-form v-show="form.active" v-for="form in forms" :ref="`form${form.id}`" :key="form.id" label-width="80px">
-                <div>{{form.id}}</div>
-                <object-editor v-if="form.schema" :ref="`root${form.id}`" :schema="form.schema" :instanceData="form.data" @change="onChange(form)"></object-editor>
-                <el-button @click="save(form)">保存</el-button>
-            </el-form>
-        </div>
-        <div class="output">
-            <h3>表单数据</h3>
-            <code><pre>{{output}}</pre></code>
-        </div>
-        <div class="page">
-            <h3>页面结构</h3>
-            <code><pre>{{pageData}}</pre></code>
-            <el-button @click="savePageData">保存</el-button>
+            <div class="canvas-container">
+                <div class="canvas">
+                    <h3>画布</h3>
+                    <div class="container">
+                        <div v-for="block in page.blocks" :key="block.id" :class="{active: block.active, 'has-active': block.components.find(c => c.active)}" class="block-container" @click="active(block)">
+                            <component
+                                v-bind:is="block.component"
+                                :blockId="block.id"
+                                :instanceData="block.data"
+                                :components="block.components" @component-active="onComponentActive"></component>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form">
+                <h3>表单</h3>  
+                <el-form v-show="form.active" v-for="form in forms" :ref="`form${form.id}`" :key="form.id" label-width="80px">
+                    <div>{{form.id}}</div>
+                    <object-editor v-if="form.schema" :ref="`root${form.id}`" :schema="form.schema" :instanceData="form.data" @change="onChange(form)"></object-editor>
+                    <el-button @click="save(form)">保存</el-button>
+                </el-form>
+            </div>
         </div>
     </div>
 </template>
@@ -229,12 +233,46 @@ export default {
 body {
     margin: 0;
 }
-#app {
+.header {
     display: flex;
+    position: absolute;
+    top: 0;
+    width: 100vw;
+    height: 64px;
+    box-shadow: 0 2px 6px 0 rgba(0,0,0,.08);
 }
-#app > div {
+.header .logo {
+    width: 200px;
+    line-height: 64px;
+}
+.header .actions {
+    text-align: right;
+    line-height: 64px;
+    flex: 1;
+    padding-right: 40px;
+}
+.main {
+    display: flex;
+    position: absolute;
+    top: 64px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+.components {
     width: 20vw;
-    box-sizing: border-box;
+}
+.canvas-container {
+    width: 50vw;
+    overflow-y: auto;
+    background-color: #f4f7f9;
+}
+.canvas {
+    width: 375px;
+    margin: 0 auto;
+}
+.form {
+    width: 30vw;
 }
 .container > div {
     box-sizing: border-box;

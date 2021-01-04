@@ -54,4 +54,13 @@ export default {
     position: absolute;
     z-index: 2;
 }
+.x-component.active::after  {
+    content: "";
+    position: absolute;
+    border: 1px dashed #81b0ff;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
 </style>

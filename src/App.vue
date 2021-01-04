@@ -16,6 +16,9 @@
                 </div>
                 <h3>组件列表</h3>
                 <div>
+                    <el-button size="small" @click="addComponent(`plain-text`)">简单文本</el-button>
+                </div>
+                <div>
                     <el-button size="small" @click="addComponent(`background`)">背景颜色组件</el-button>
                 </div>
                 <div>
@@ -42,7 +45,6 @@
                 <el-form v-show="form.active" v-for="form in forms" :ref="`form${form.id}`" :key="form.id" label-width="80px">
                     <div>{{form.id}}</div>
                     <object-editor v-if="form.schema" :ref="`root${form.id}`" :schema="form.schema" :instanceData="form.data" @change="onChange(form)"></object-editor>
-                    <el-button @click="save(form)">保存</el-button>
                 </el-form>
             </div>
         </div>
@@ -52,15 +54,18 @@
 <script>
 import em from '@/lib/em';
 import id from '@/lib/id';
+import schema2output from '@/lib/output';
 
 import block from './components/components/block/';
 import background from './components/components/background/';
 import size from './components/components/size/';
+import plainText from './components/components/plain-text/';
 
 const componentsMap = {
     block,
     background,
     size,
+    'plain-text': plainText,
 };
 
 export default {
@@ -167,7 +172,7 @@ export default {
             let name, data;
             if (typeof comp === 'string') {
                 name = comp;
-                data = {};
+                data = this.getDefaultData(componentsMap[name].schema);
             } else {
                 name = comp.name;
                 data = comp.data;
@@ -193,6 +198,9 @@ export default {
         },
         savePageData() {
             window.localStorage.setItem('data', JSON.stringify(this.pageData));
+        },
+        getDefaultData(schema) {
+            return schema2output(schema);
         },
     },
     created() {
@@ -274,18 +282,29 @@ body {
 .form {
     width: 30vw;
 }
+.container {
+    background: #ffffff;
+}
 .container > div {
+    position: relative;
     box-sizing: border-box;
-    border: 1px solid #ffffff;
 }
-.container .active {
-    border: 1px solid #cccccc;
-}
-.container .block-container.active, .container .block-container.has-active {
+.block-container.active::after, .block-container.has-active::after {
+    content: "";
+    position: absolute;
     border: 2px solid #81b0ff;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 1;
 }
+/* .container .block-container.active, .container .block-container.has-active {
+    border: 2px solid #81b0ff;
+} */
 
 .x-component {
     position: absolute;
+    z-index: 2;
 }
 </style>

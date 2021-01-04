@@ -1,7 +1,7 @@
 <template>
     <div class="block" :style="{backgroundColor: instanceData.bgColor}">
         <div v-if="components.length === 0">empty block</div>
-        <div v-else v-for="component in components" :key="component.id" :class="{active: component.active}" :style="{top: `${component.data.layout.top}px`, left: `${component.data.layout.left}px`}" @click.stop="active(component)" @mousedown="(e) => {onMouseDown(e, component)}" @mouseup="onMouseUp" @mousemove.prevent="onMouseMove" class="x-component">
+        <div v-else v-for="component in components" :key="component.id" :class="{active: component.active}" :style="{top: `${component.data.layout && component.data.layout.top}px`, left: `${component.data.layout && component.data.layout.left}px`}" @click.stop="active(component)" @mousedown="(e) => {onMouseDown(e, component)}" @mouseup="onMouseUp" @mousemove.prevent="onMouseMove" class="x-component">
             <component v-bind:is="component.component" :componentId="component.id" :instanceData="component.data"></component>
         </div>
     </div>

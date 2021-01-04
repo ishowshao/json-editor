@@ -1,0 +1,27 @@
+{
+    "title": "简单文本",
+    "type": "object",
+    "properties": {
+        "content": {
+            "type": "string",
+            "title": "文本内容",
+            "default": "请添加文本内容"
+        },
+        "layout": {
+            "title": "布局",
+            "type": "object",
+            "properties": {
+                "left": {
+                    "type": "integer",
+                    "title": "横轴",
+                    "default": 0
+                },
+                "top": {
+                    "type": "integer",
+                    "title": "纵轴",
+                    "default": 0
+                }
+            }
+        }
+    }
+}

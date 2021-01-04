@@ -1,0 +1,57 @@
+<template>
+    <div
+        :style="{top: `${instanceData.layout.top}px`, left: `${instanceData.layout.left}px`}"
+        @mousedown="onMouseDown"
+        @mouseup="onMouseUp"
+        @mousemove.prevent="onMouseMove"
+        @click.stop="active"
+        :class="{active: component.active}"
+        class="x-component">
+        <slot></slot>
+    </div>
+</template>
+<script>
+export default {
+    props: ['component', 'instanceData'],
+    data() {
+        return {
+            target: null,
+            clientX: null,
+            clientY: null,
+            top: null,
+            left: null,
+        };
+    },
+    methods: {
+        active() {
+            this.$emit('active', this.component);
+        },
+        onMouseDown(e) {
+            console.log('mousedown', e, this.component);
+            this.target = e.target;
+            this.clientX = e.clientX;
+            this.clientY = e.clientY;
+            this.top = Number(this.component.data.layout.top) || 0;
+            this.left = Number(this.component.data.layout.left) || 0;
+        },
+        onMouseUp(e) {
+            this.target = null;
+            this.component.data.layout.top = this.top + e.clientY - this.clientY;
+            this.component.data.layout.left = this.left + e.clientX - this.clientX;
+        },
+        onMouseMove(e) {
+            if (this.target) {
+                // console.log(this.target);
+                this.component.data.layout.top = this.top + e.clientY - this.clientY;
+                this.component.data.layout.left = this.left + e.clientX - this.clientX;
+            }
+        },
+    }
+}
+</script>
+<style>
+.x-component {
+    position: absolute;
+    z-index: 2;
+}
+</style>

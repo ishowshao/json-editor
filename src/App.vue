@@ -302,9 +302,4 @@ body {
 /* .container .block-container.active, .container .block-container.has-active {
     border: 2px solid #81b0ff;
 } */
-
-.x-component {
-    position: absolute;
-    z-index: 2;
-}
 </style>

@@ -1,14 +1,19 @@
 <template>
     <div class="block" :style="{backgroundColor: instanceData.bgColor}">
         <div v-if="components.length === 0">empty block</div>
-        <div v-else v-for="component in components" :key="component.id" :class="{active: component.active}" :style="{top: `${component.data.layout && component.data.layout.top}px`, left: `${component.data.layout && component.data.layout.left}px`}" @click.stop="active(component)" @mousedown="(e) => {onMouseDown(e, component)}" @mouseup="onMouseUp" @mousemove.prevent="onMouseMove" class="x-component">
+        <layout v-else v-for="component in components" :key="component.id" :component="component" :instanceData="component.data" @active="active">
             <component v-bind:is="component.component" :componentId="component.id" :instanceData="component.data"></component>
-        </div>
+        </layout>
     </div>
 </template>
 <script>
+import Layout from '@/components/Layout.vue';
+
 export default {
     props: ['blockId', 'instanceData', 'components'],
+    components: {
+        Layout,
+    },
     data() {
         return {
             targetComponent: null,
@@ -22,27 +27,6 @@ export default {
     methods: {
         active(component) {
             this.$emit('component-active', component, this.blockId);
-        },
-        onMouseDown(e, component) {
-            console.log('mousedown', e, component);
-            this.targetComponent = component;
-            this.target = e.target;
-            this.clientX = e.clientX;
-            this.clientY = e.clientY;
-            this.top = Number(this.targetComponent.data.layout.top) || 0;
-            this.left = Number(this.targetComponent.data.layout.left) || 0;
-        },
-        onMouseUp(e) {
-            this.target = null;
-            this.targetComponent.data.layout.top = this.top + e.clientY - this.clientY;
-            this.targetComponent.data.layout.left = this.left + e.clientX - this.clientX;
-        },
-        onMouseMove(e) {
-            if (this.target) {
-                // console.log(this.target);
-                this.targetComponent.data.layout.top = this.top + e.clientY - this.clientY;
-                this.targetComponent.data.layout.left = this.left + e.clientX - this.clientX;
-            }
         },
     }
 }

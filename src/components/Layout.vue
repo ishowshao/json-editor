@@ -73,7 +73,7 @@ export default {
     box-sizing: border-box;
     border: 1px solid black;
 }
-.active .handle {
+.x-component.active .handle {
     display: block;
 }
 .handle-l {

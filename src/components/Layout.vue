@@ -78,10 +78,10 @@ export default {
 }
 .handle-l {
     top: 50%;
-    left: 0;
+    left: -3px;
 }
 .handle-r {
     top: 50%;
-    right: 0;
+    right: -3px;
 }
 </style>

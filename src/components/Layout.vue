@@ -8,8 +8,8 @@
         :class="{active: component.active}"
         class="x-component">
         <slot></slot>
-        <div class="handle handle-l"></div>
-        <div class="handle handle-r"></div>
+        <div class="handle handle-l" @mousedown.stop="onHandleMouseDown" @mouseup.stop="onHandleMouseUp"></div>
+        <div class="handle handle-r" @mousedown.stop="onHandleMouseDown" @mouseup.stop="onHandleMouseUp"></div>
     </div>
 </template>
 <script>
@@ -22,6 +22,11 @@ export default {
             clientY: null,
             top: null,
             left: null,
+            handle: {
+                clientX: null,
+                clientY: null,
+                width: null,
+            },
         };
     },
     methods: {
@@ -47,6 +52,25 @@ export default {
                 this.component.data.layout.top = this.top + e.clientY - this.clientY;
                 this.component.data.layout.left = this.left + e.clientX - this.clientX;
             }
+            if (this.handle.clientX) {
+                console.log(e.clientX, e.clientY);
+                this.instanceData.layout.width = Number(this.handle.width) + e.clientX - this.handle.clientX;
+            }
+        },
+        onHandleMouseDown(e) {
+            console.log(e, e.clientX, e.clientY);
+            this.handle.clientX = e.clientX;
+            this.handle.width = this.instanceData.layout.width;
+        },
+        // onHandleMouseMove(e) {
+        //     if (this.handle.clientX) {
+        //         console.log(e.clientX, e.clientY);
+        //         this.instanceData.layout.width = Number(this.handle.width) + e.clientX - this.handle.clientX;
+        //     }
+        // },
+        onHandleMouseUp(e) {
+            this.handle.clientX = null;
+            this.handle.width = null;
         },
     }
 }
@@ -72,6 +96,8 @@ export default {
     height: 7px;
     box-sizing: border-box;
     border: 1px solid black;
+    z-index: 10;
+    background-color: #ffffff;
 }
 .x-component.active .handle {
     display: block;

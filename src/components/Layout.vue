@@ -10,11 +10,12 @@
         <slot></slot>
         <div class="handle handle-l" @mousedown.stop="onHandleMouseDown" @mouseup.stop="onHandleMouseUp"></div>
         <div class="handle handle-r" @mousedown.stop="onHandleMouseDown" @mouseup.stop="onHandleMouseUp"></div>
+        <div v-if="handle.inUse" class="handle-canvas"></div>
     </div>
 </template>
 <script>
 export default {
-    props: ['component', 'instanceData'],
+    props: ['component', 'instanceData', 'mouse'],
     data() {
         return {
             target: null,
@@ -23,8 +24,9 @@ export default {
             top: null,
             left: null,
             handle: {
-                clientX: null,
-                clientY: null,
+                inUse: false,
+                x: null,
+                y: null,
                 width: null,
             },
         };
@@ -58,8 +60,9 @@ export default {
             }
         },
         onHandleMouseDown(e) {
-            console.log(e, e.clientX, e.clientY);
-            this.handle.clientX = e.clientX;
+            console.log('onHandleMouseDown', this.mouse.clientX);
+            this.handle.inUse = true;
+            this.handle.x = this.mouse.clientX;
             this.handle.width = this.instanceData.layout.width;
         },
         // onHandleMouseMove(e) {
@@ -69,9 +72,16 @@ export default {
         //     }
         // },
         onHandleMouseUp(e) {
-            this.handle.clientX = null;
-            this.handle.width = null;
+            this.handle.inUse = false;
         },
+    },
+    watch: {
+        'mouse.clientX': function (value) {
+            if (this.handle.inUse) {
+                console.log(value);
+                this.instanceData.layout.width = Number(this.handle.width) + value - this.handle.x;
+            }
+        }
     }
 }
 </script>

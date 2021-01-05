@@ -36,10 +36,10 @@ export default {
         }
     },
     created() {
-        console.log('object created', this.schema);
+        // console.log('object created', this.schema);
     },
     beforeDestroy() {
-        console.log('object beforeDestroy')
+        // console.log('object beforeDestroy')
     }
 };
 </script>

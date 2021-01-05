@@ -29,12 +29,14 @@
                 <div class="canvas">
                     <h3>画布</h3>
                     <div class="container">
-                        <div v-for="block in page.blocks" :key="block.id" :class="{active: block.active, 'has-active': block.components.find(c => c.active)}" class="block-container" @click="active(block)">
+                        <div v-for="block in page.blocks" :key="block.id" :class="{active: block.active, 'has-active': block.components.find(c => c.active)}" class="block-container" @click="active(block)" @mousemove="(e) => { onMouseMove(e, block) }">
                             <component
                                 v-bind:is="block.component"
                                 :blockId="block.id"
                                 :instanceData="block.data"
-                                :components="block.components" @component-active="onComponentActive"></component>
+                                :components="block.components"
+                                :mouse="block.mouse"
+                                @component-active="onComponentActive"></component>
                         </div>
                     </div>
                 </div>
@@ -159,6 +161,10 @@ export default {
                 component: component,
                 components: [],
                 data: data,
+                mouse: {
+                    clientX: 0,
+                    clientY: 0,
+                },
             };
             this.page.blocks.push(item);
             if (typeof block !== 'string') {
@@ -201,6 +207,11 @@ export default {
         },
         getDefaultData(schema) {
             return schema2output(schema);
+        },
+        onMouseMove(e, block) {
+            // console.log(e.offsetX, e.offsetY);
+            block.mouse.clientX = e.clientX;
+            block.mouse.clientY = e.clientY;
         },
     },
     created() {

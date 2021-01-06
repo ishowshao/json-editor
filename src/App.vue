@@ -28,7 +28,7 @@
             <div class="canvas-container">
                 <div class="canvas" @mousedown="onCanvasMouseDown" @mouseup="onCanvasMouseUp" @mouseleave="onCanvasMouseLeave" @mousemove="onCanvasMouseMove">
                     <div class="container">
-                        <div v-for="block in page.blocks" :key="block.id" :class="{active: block.active, 'has-active': block.components.find(c => c.active)}" class="block-container" @click="active(block)">
+                        <div v-for="block in page.blocks" :key="block.id" :class="{active: block.active, 'has-active': block.components.find(c => c.active)}" class="block-container" @mousedown="active(block)">
                             <component
                                 v-bind:is="block.component"
                                 :blockId="block.id"
@@ -122,8 +122,8 @@ export default {
             // emit
             eventbus.emit('change', component.id, value);
         },
-        active(component) {
-            console.log('active', component);
+        active(component, e) {
+            console.log('active', component, e);
             if (!component.active) {
                 this.forms.forEach(c => c.active = false);
                 component.active = true;

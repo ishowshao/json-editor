@@ -38,6 +38,8 @@ export default {
             this.$emit('active', this.component);
         },
         onMouseDown(e) {
+            e.preventDefault();
+            e.stopPropagation();
             console.log('mousedown', e, this.component);
             this.target = e.target;
             this.clientX = e.clientX;

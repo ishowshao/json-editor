@@ -177,7 +177,9 @@ export default {
                 data = comp.data;
             }
             if (!block) {
-                block = this.page.blocks.find(block => block.active);
+                block = this.page.blocks.find(block => {
+                    return block.active || block.components.find(c => c.active);
+                });
                 if (!block) {
                     this.addBlock('block');
                     block = this.page.blocks[this.page.blocks.length - 1];

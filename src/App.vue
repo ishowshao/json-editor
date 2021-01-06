@@ -27,7 +27,6 @@
             </div>
             <div class="canvas-container">
                 <div class="canvas">
-                    <h3>画布</h3>
                     <div class="container">
                         <div v-for="block in page.blocks" :key="block.id" :class="{active: block.active, 'has-active': block.components.find(c => c.active)}" class="block-container" @click="active(block)" @mousemove="(e) => { onMouseMove(e, block) }">
                             <component
@@ -285,6 +284,7 @@ body {
     width: 50vw;
     overflow-y: auto;
     background-color: #f4f7f9;
+    padding-top: 80px;
 }
 .canvas {
     width: 375px;

@@ -127,8 +127,6 @@ export default {
             if (!component.active) {
                 this.forms.forEach(c => c.active = false);
                 component.active = true;
-                const schema = component.schema;
-                // this.gen(component);
             }
         },
         onComponentActive(component) {
@@ -137,9 +135,6 @@ export default {
                 this.forms.forEach(c => c.active = false);
                 component.active = true;
             }
-        },
-        increase(component) {
-            console.log(component);
         },
         addBlock(block) {
             let name, data;

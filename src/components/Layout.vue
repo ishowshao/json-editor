@@ -1,7 +1,7 @@
 <template>
     <div
         :style="{top: `${instanceData.layout.top}px`, left: `${instanceData.layout.left}px`, width: `${instanceData.layout.width}px`}"
-        @mousedown="onMouseDown"
+        @mousedown.stop="onMouseDown"
         @mouseup="onMouseUp"
         @mousemove.prevent="onMouseMove"
         @click.stop="active"
@@ -46,9 +46,11 @@ export default {
             this.left = Number(this.component.data.layout.left) || 0;
         },
         onMouseUp(e) {
-            this.target = null;
-            this.component.data.layout.top = this.top + e.clientY - this.clientY;
-            this.component.data.layout.left = this.left + e.clientX - this.clientX;
+            if (this.target) {
+                this.target = null;
+                this.component.data.layout.top = this.top + e.clientY - this.clientY;
+                this.component.data.layout.left = this.left + e.clientX - this.clientX;
+            }
         },
         onMouseMove(e) {
             if (this.target) {
@@ -62,6 +64,7 @@ export default {
             }
         },
         onHandleMouseDown(e) {
+            this.target = null;
             this.handle.inUse = true;
             this.handle.x = e.clientX;
             this.handle.width = this.instanceData.layout.width;
@@ -73,12 +76,18 @@ export default {
             }
         },
         onHandleMouseUp(e) {
-            this.handle.inUse = false;
+            if (this.handle.inUse) {
+                this.active();
+                this.handle.inUse = false;
+            }
         },
     },
     mounted() {
         eventbus.on('canvas-mousemove', (e) => {
             this.onHandleMouseMove(e);
+        });
+        eventbus.on('canvas-mouseup', (e) => {
+            this.onHandleMouseUp(e);
         });
     },
 }

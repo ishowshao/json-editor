@@ -14,7 +14,7 @@
     </div>
 </template>
 <script>
-import em from '@/lib/em';
+import eventbus from '@/lib/eventbus';
 
 export default {
     props: ['component', 'instanceData'],
@@ -78,7 +78,7 @@ export default {
         },
     },
     mounted() {
-        em.on('canvas-mousemove', (e) => {
+        eventbus.on('canvas-mousemove', (e) => {
             this.onHandleMouseMove(e);
         });
     },

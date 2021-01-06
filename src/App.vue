@@ -52,7 +52,7 @@
 </template>
 
 <script>
-import em from '@/lib/em';
+import eventbus from '@/lib/eventbus';
 import id from '@/lib/id';
 import schema2output from '@/lib/output';
 
@@ -113,14 +113,14 @@ export default {
             console.log(value);
             this.output = value;
             // emit
-            em.emit('change', component.id, value);
+            eventbus.emit('change', component.id, value);
         },
         onChange(component) {
             const value = this.$refs[`root${component.id}`][0].getValue();
             console.log(value);
             this.output = value;
             // emit
-            em.emit('change', component.id, value);
+            eventbus.emit('change', component.id, value);
         },
         active(component) {
             console.log('active', component);
@@ -212,20 +212,20 @@ export default {
             block.mouse.clientY = e.clientY;
         },
         onCanvasMouseMove(e) {
-            em.emit('canvas-mousemove', e);
+            eventbus.emit('canvas-mousemove', e);
         },
         onCanvasMouseLeave(e) {
-            em.emit('canvas-mouseleave', e);
+            eventbus.emit('canvas-mouseleave', e);
         },
         onCanvasMouseDown(e) {
-            em.emit('canvas-mousedown', e);
+            eventbus.emit('canvas-mousedown', e);
         },
         onCanvasMouseUp(e) {
-            em.emit('canvas-mouseup', e);
+            eventbus.emit('canvas-mouseup', e);
         },
     },
     created() {
-        em.on('change', (id, data) => {
+        eventbus.on('change', (id, data) => {
             console.log(id, 'changed', data);
             const blocks = this.page.blocks;
             for (let i = 0; i < blocks.length; i++) {

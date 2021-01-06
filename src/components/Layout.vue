@@ -62,9 +62,8 @@ export default {
             }
         },
         onHandleMouseDown(e) {
-            console.log('onHandleMouseDown', this.mouse.clientX);
             this.handle.inUse = true;
-            this.handle.x = this.mouse.clientX;
+            this.handle.x = e.clientX;
             this.handle.width = this.instanceData.layout.width;
         },
         onHandleMouseMove(e) {

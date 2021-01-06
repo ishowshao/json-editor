@@ -14,8 +14,10 @@
     </div>
 </template>
 <script>
+import em from '@/lib/em';
+
 export default {
-    props: ['component', 'instanceData', 'mouse'],
+    props: ['component', 'instanceData'],
     data() {
         return {
             target: null,
@@ -65,24 +67,21 @@ export default {
             this.handle.x = this.mouse.clientX;
             this.handle.width = this.instanceData.layout.width;
         },
-        // onHandleMouseMove(e) {
-        //     if (this.handle.clientX) {
-        //         console.log(e.clientX, e.clientY);
-        //         this.instanceData.layout.width = Number(this.handle.width) + e.clientX - this.handle.clientX;
-        //     }
-        // },
+        onHandleMouseMove(e) {
+            if (this.handle.inUse) {
+                console.log(e.clientX, e.clientY);
+                this.instanceData.layout.width = Number(this.handle.width) + e.clientX - this.handle.x;
+            }
+        },
         onHandleMouseUp(e) {
             this.handle.inUse = false;
         },
     },
-    watch: {
-        'mouse.clientX': function (value) {
-            if (this.handle.inUse) {
-                console.log(value);
-                this.instanceData.layout.width = Number(this.handle.width) + value - this.handle.x;
-            }
-        }
-    }
+    mounted() {
+        em.on('canvas-mousemove', (e) => {
+            this.onHandleMouseMove(e);
+        });
+    },
 }
 </script>
 <style>

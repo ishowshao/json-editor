@@ -1,7 +1,7 @@
 <template>
     <div class="block" :style="{backgroundColor: instanceData.bgColor}">
         <div v-if="components.length === 0">empty block</div>
-        <layout v-else v-for="component in components" :key="component.id" :component="component" :instanceData="component.data" :mouse="mouse" @active="active">
+        <layout v-else v-for="component in components" :key="component.id" :component="component" :instanceData="component.data" @active="active">
             <component v-bind:is="component.component" :componentId="component.id" :instanceData="component.data"></component>
         </layout>
     </div>
@@ -10,7 +10,7 @@
 import Layout from '@/components/Layout.vue';
 
 export default {
-    props: ['blockId', 'instanceData', 'components', 'mouse'],
+    props: ['blockId', 'instanceData', 'components'],
     components: {
         Layout,
     },

@@ -34,7 +34,6 @@
                                 :blockId="block.id"
                                 :instanceData="block.data"
                                 :components="block.components"
-                                :mouse="block.mouse"
                                 @component-active="onComponentActive"></component>
                         </div>
                     </div>

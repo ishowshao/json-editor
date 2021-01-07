@@ -1,6 +1,6 @@
 <template>
-    <el-form-item :label="name" :key="name">
-        <el-input v-model="value" type="number" @change="onChange"></el-input>
+    <el-form-item :label="schema.title" :key="name">
+        <el-input-number v-model="value" controls-position="right" @change="onChange"></el-input-number>
     </el-form-item>
 </template>
 <script>

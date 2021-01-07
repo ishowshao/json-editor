@@ -47,6 +47,7 @@
                         },
                         "fontSize": {
                             "type": "integer",
+                            "$layout": "inline",
                             "title": "字号"
                         }
                     }
@@ -64,12 +65,6 @@
                     }
                 }
             }
-        },
-        "color": {
-            "type": "string",
-            "format": "color",
-            "title": "背景色",
-            "default": "#ffffff"
         },
         "layout": {
             "title": "布局",

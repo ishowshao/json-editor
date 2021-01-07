@@ -40,12 +40,10 @@
                 </div>
             </div>
 
-            <div class="form">
-                <h3>表单</h3>  
-                <el-form v-show="form.active" v-for="form in forms" :ref="`form${form.id}`" :key="form.id" label-width="80px">
-                    <div>{{form.id}}</div>
-                    <object-editor v-if="form.schema" :ref="`root${form.id}`" :schema="form.schema" :instanceData="form.data" @change="onChange(form)"></object-editor>
-                </el-form>
+            <div class="form" style="padding: 20px;">
+                <div v-show="form.active" v-for="form in forms" :ref="`form${form.id}`" :key="form.id">
+                    <object-editor v-if="form.schema" :ref="`root${form.id}`" :schema="form.schema" :instanceData="form.data" @change="onChange(form)" :root="true"></object-editor>
+                </div>
             </div>
         </div>
     </div>

@@ -1,7 +1,14 @@
 <template>
     <div class="block" :style="{backgroundColor: instanceData.bgColor}">
         <div v-if="components.length === 0">empty block</div>
-        <layout v-else v-for="component in components" :key="component.id" :component="component" :instanceData="component.data" @active="active">
+        <layout
+            v-else
+            v-for="(component, index) in components"
+            :key="component.id"
+            :component="component"
+            :instanceData="component.data"
+            :zIndex="zIndex + index"
+            @active="active">
             <component v-bind:is="component.component" :componentId="component.id" :instanceData="component.data"></component>
         </layout>
     </div>
@@ -16,6 +23,7 @@ export default {
     },
     data() {
         return {
+            zIndex: 2,
             targetComponent: null,
             target: null,
             clientX: null,

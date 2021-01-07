@@ -1,6 +1,6 @@
 <template>
     <div
-        :style="{top: `${instanceData.layout.top}px`, left: `${instanceData.layout.left}px`, width: `${instanceData.layout.width}px`}"
+        :style="{top: `${instanceData.layout.top}px`, left: `${instanceData.layout.left}px`, width: `${instanceData.layout.width}px`, 'z-index': zIndex}"
         @mousedown.stop="onMouseDown"
         @mouseup="onMouseUp"
         @mousemove.prevent="onMouseMove"
@@ -17,7 +17,7 @@
 import eventbus from '@/lib/eventbus';
 
 export default {
-    props: ['component', 'instanceData'],
+    props: ['component', 'instanceData', 'zIndex'],
     data() {
         return {
             target: null,
@@ -98,6 +98,7 @@ export default {
 .x-component {
     position: absolute;
     z-index: 2;
+    /* background-color: white; */
 }
 .x-component.active::after  {
     content: "";

@@ -2,6 +2,81 @@
     "title": "背景色组件",
     "type": "object",
     "properties": {
+        "content": {
+            "title": "组件内容",
+            "type": "object",
+            "$layout": "normal",
+            "properties": {
+                "text": {
+                    "type": "string",
+                    "title": "按钮文字",
+                    "default": "立即预约"
+                },
+                "gameId": {
+                    "type": "string",
+                    "title": "游戏ID",
+                    "default": "22332233"
+                },
+                "gameName": {
+                    "type": "string",
+                    "title": "游戏名称",
+                    "default": "原神",
+                    "readOnly": true
+                },
+                "gameDesc": {
+                    "type": "string",
+                    "title": "游戏简介",
+                    "default": "开放世界",
+                    "readOnly": true
+                }
+            }
+        },
+        "style": {
+            "title": "按钮样式",
+            "type": "object",
+            "properties": {
+                "text": {
+                    "type": "object",
+                    "title": "按钮文字",
+                    "$layout": "inline",
+                    "properties": {
+                        "color": {
+                            "type": "string",
+                            "title": "",
+                            "default": "#ffffff"
+                        },
+                        "fontSize": {
+                            "type": "integer",
+                            "title": "字号"
+                        }
+                    }
+                },
+                "background": {
+                    "type": "object",
+                    "$layout": "inline",
+                    "title": "按钮填充",
+                    "properties": {
+                        "color": {
+                            "type": "string",
+                            "title": "",
+                            "default": "#0aaae6"
+                        }
+                    }
+                },
+                "gameName": {
+                    "type": "string",
+                    "title": "游戏名称",
+                    "default": "原神",
+                    "readOnly": true
+                },
+                "gameDesc": {
+                    "type": "string",
+                    "title": "游戏简介",
+                    "default": "开放世界",
+                    "readOnly": true
+                }
+            }
+        },
         "color": {
             "type": "string",
             "format": "color",

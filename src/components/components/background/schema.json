@@ -62,18 +62,6 @@
                             "default": "#0aaae6"
                         }
                     }
-                },
-                "gameName": {
-                    "type": "string",
-                    "title": "游戏名称",
-                    "default": "原神",
-                    "readOnly": true
-                },
-                "gameDesc": {
-                    "type": "string",
-                    "title": "游戏简介",
-                    "default": "开放世界",
-                    "readOnly": true
                 }
             }
         },

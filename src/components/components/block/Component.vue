@@ -1,6 +1,8 @@
 <template>
-    <div class="block position-relative" :style="{backgroundColor: instanceData.bgColor}">
-        <div v-if="components.length === 0">empty block</div>
+    <div class="block position-relative" :style="{backgroundColor: instanceData.bgColor, height: `${instanceData.height}px`}">
+        <div v-if="components.length === 0" class="block-placeholder d-flex justify-content-center align-items-center position-absolute" style="border: 1px dashed #0aaae6; top: 10px; left: 10px; right: 10px; bottom: 10px;">
+            <div>可从左侧点击或拖拽组件到这里</div>
+        </div>
         <layout
             v-else
             v-for="(component, index) in components"
@@ -77,5 +79,9 @@ export default {
 .block-container.active .block-handler.block-handler-bottom {
     bottom: -14px;
     transform: scaleY(-1);
+}
+.block-placeholder {
+    color: #999999;
+    font-size: 14px;
 }
 </style>

@@ -28,15 +28,13 @@
             </div>
             <div class="canvas-container">
                 <div class="canvas" @mousedown="onCanvasMouseDown" @mouseup="onCanvasMouseUp" @mouseleave="onCanvasMouseLeave" @mousemove="onCanvasMouseMove">
-                    <div class="container">
-                        <div v-for="block in page.blocks" :key="block.id" :class="{active: block.active, 'has-active': block.components.find(c => c.active)}" class="block-container" @mousedown="active(block)">
-                            <component
-                                v-bind:is="block.component"
-                                :blockId="block.id"
-                                :instanceData="block.data"
-                                :components="block.components"
-                                @component-active="onComponentActive"></component>
-                        </div>
+                    <div v-for="block in page.blocks" :key="block.id" :class="{active: block.active, 'has-active': block.components.find(c => c.active)}" class="block-container" @mousedown="active(block)">
+                        <component
+                            v-bind:is="block.component"
+                            :blockId="block.id"
+                            :instanceData="block.data"
+                            :components="block.components"
+                            @component-active="onComponentActive"></component>
                     </div>
                 </div>
             </div>
@@ -282,27 +280,26 @@ body {
 .canvas-container {
     flex: 1;
     overflow-y: auto;
-    background-color: #f4f7f9;
+    background-color: #F5F7FA;
     padding-top: 80px;
 }
 .canvas {
     width: 375px;
+    min-height: 667px;
+    background: #FFFFFF;
     margin: 0 auto;
 }
 .editor {
     width: 480px;
 }
-.container {
-    background: #ffffff;
-}
-.container > div {
+.canvas > div {
     position: relative;
     box-sizing: border-box;
 }
 .block-container.active::after, .block-container.has-active::after {
     content: "";
     position: absolute;
-    border: 2px solid #81b0ff;
+    border: 2px solid #0AAAE6;
     top: 0;
     left: 0;
     bottom: 0;

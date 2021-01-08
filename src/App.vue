@@ -9,7 +9,12 @@
             </div>
         </div>
         <div class="main">
-            <div class="components">
+            <div class="select-component">
+                <div class="category">
+                    <div>组件</div>
+                    <div>模块</div>
+                    <div>模板</div>
+                </div>
                 <h3>模块列表</h3>
                 <div>
                     <el-button size="small" @click="addBlock(`block`)">空白模块</el-button>
@@ -39,8 +44,7 @@
                     </div>
                 </div>
             </div>
-
-            <div class="form" style="padding: 20px;">
+            <div class="editor" style="padding: 20px;">
                 <div v-show="form.active" v-for="form in forms" :ref="`form${form.id}`" :key="form.id">
                     <object-editor v-if="form.schema" :ref="`root${form.id}`" :schema="form.schema" :instanceData="form.data" @change="onChange(form)" :root="true"></object-editor>
                 </div>
@@ -278,11 +282,9 @@ body {
     left: 0;
     right: 0;
 }
-.components {
-    width: 20vw;
-}
+
 .canvas-container {
-    width: 50vw;
+    flex: 1;
     overflow-y: auto;
     background-color: #f4f7f9;
     padding-top: 80px;
@@ -291,8 +293,8 @@ body {
     width: 375px;
     margin: 0 auto;
 }
-.form {
-    width: 30vw;
+.editor {
+    width: 480px;
 }
 .container {
     background: #ffffff;

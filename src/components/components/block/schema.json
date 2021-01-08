@@ -2,15 +2,16 @@
     "title": "空白模块",
     "type": "object",
     "properties": {
-        "bgColor": {
+        "bg": {
             "type": "string",
-            "format": "color",
-            "title": "模块背景色",
+            "format": "block-bg",
+            "title": "背景选择",
             "default": "#ffffff"
         },
-        "bgImage": {
-            "type": "string",
-            "title": "模块背景图"
+        "height": {
+            "type": "integer",
+            "title": "模块高度",
+            "default": 200
         }
     }
 }

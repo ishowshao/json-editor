@@ -28,7 +28,7 @@
             </div>
             <div class="canvas-container">
                 <div class="canvas" @mousedown="onCanvasMouseDown" @mouseup="onCanvasMouseUp" @mouseleave="onCanvasMouseLeave" @mousemove="onCanvasMouseMove">
-                    <div v-for="block in page.blocks" :key="block.id" :class="{active: block.active, 'has-active': block.components.find(c => c.active)}" class="block-container" @mousedown="active(block)">
+                    <div v-for="block in page.blocks" :key="block.id" :class="{active: block.active || block.components.find(c => c.active), 'has-active': block.components.find(c => c.active)}" class="block-container" @mousedown="active(block)">
                         <component
                             v-bind:is="block.component"
                             :blockId="block.id"

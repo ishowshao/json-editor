@@ -10,24 +10,20 @@
         </div>
         <div class="main">
             <div class="select-component">
-                <div class="category">
-                    <div>组件</div>
-                    <div>模块</div>
-                    <div>模板</div>
+                <div class="d-flex category">
+                    <div class="flex-grow-1 text-center">组件</div>
+                    <div class="flex-grow-1 text-center">模块</div>
+                    <div class="flex-grow-1 text-center">模板</div>
                 </div>
-                <h3>模块列表</h3>
-                <div>
-                    <el-button size="small" @click="addBlock(`block`)">空白模块</el-button>
-                </div>
-                <h3>组件列表</h3>
-                <div>
-                    <el-button size="small" @click="addComponent(`plain-text`)">简单文本</el-button>
-                </div>
-                <div>
-                    <el-button size="small" @click="addComponent(`background`)">背景颜色组件</el-button>
-                </div>
-                <div>
-                    <el-button size="small" @click="addComponent(`size`)">调整宽高组件</el-button>
+                <div class="components d-flex">
+                    <div class="components-list">
+                        <div class="group">内容组件</div>
+                        <div class="component">文本</div>
+                    </div>
+                    <div class="components-style flex-grow-1">
+                        <div class="group">简单文本</div>
+                        <div class="example" @click="addComponent(`plain-text`)">请添加文本内容</div>
+                    </div>
                 </div>
             </div>
             <div class="canvas-container">
@@ -261,23 +257,23 @@ body {
     position: absolute;
     top: 0;
     width: 100vw;
-    height: 64px;
+    height: 60px;
     box-shadow: 0 2px 6px 0 rgba(0,0,0,.08);
 }
 .header .logo {
     width: 200px;
-    line-height: 64px;
+    line-height: 60px;
 }
 .header .actions {
     text-align: right;
-    line-height: 64px;
+    line-height: 60px;
     flex: 1;
     padding-right: 40px;
 }
 .main {
     display: flex;
     position: absolute;
-    top: 64px;
+    top: 60px;
     bottom: 0;
     left: 0;
     right: 0;

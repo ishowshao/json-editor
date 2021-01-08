@@ -3,7 +3,9 @@ import App from './App.vue';
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import editorMap from './components/editor/index';
-import './assets/select-component.css';
+import './assets/bootstrap.min.css';
+import './assets/select-component.less';
+
 
 Vue.use(ElementUI);
 Vue.config.productionTip = false;

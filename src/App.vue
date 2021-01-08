@@ -299,7 +299,7 @@ body {
 .block-container.active::after, .block-container.has-active::after {
     content: "";
     position: absolute;
-    border: 2px solid #0AAAE6;
+    border: 1px solid #0AAAE6;
     top: 0;
     left: 0;
     bottom: 0;

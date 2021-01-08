@@ -59,6 +59,7 @@ export default {
     left: 162px;
     z-index: 100;
     cursor: ns-resize;
+    box-shadow: 0px -2px 8px -2px rgba(0, 47, 65, 0.37);
 }
 .block-container.active .block-handler::after {
     position: absolute;

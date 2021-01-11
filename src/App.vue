@@ -290,7 +290,10 @@ body {
     margin: 0 auto;
 }
 .editor {
+    box-sizing: border-box;
     width: 480px;
+    height: 100%;
+    overflow: auto;
 }
 .canvas > div {
     position: relative;

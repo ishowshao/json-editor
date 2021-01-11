@@ -281,13 +281,14 @@ body {
     flex: 1;
     overflow-y: auto;
     background-color: #F5F7FA;
-    padding-top: 80px;
+    padding: 80px 0;
 }
 .canvas {
     width: 375px;
     min-height: 667px;
     background: #FFFFFF;
     margin: 0 auto;
+    user-select: none;
 }
 .editor {
     box-sizing: border-box;

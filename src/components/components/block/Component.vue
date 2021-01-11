@@ -13,12 +13,13 @@
             @active="active">
             <component v-bind:is="component.component" :componentId="component.id" :instanceData="component.data"></component>
         </layout>
-        <div class="position-absolute block-handler block-handler-top"></div>
-        <div class="position-absolute block-handler block-handler-bottom"></div>
+        <div  @mousedown="onMouseDown" @mouseup="onMouseUp" class="position-absolute block-handler block-handler-top"></div>
+        <div @mousedown="onMouseDown" @mouseup="onMouseUp" class="position-absolute block-handler block-handler-bottom"></div>
     </div>
 </template>
 <script>
 import Layout from '@/components/Layout.vue';
+import eventbus from '@/lib/eventbus';
 
 export default {
     props: ['blockId', 'instanceData', 'components'],
@@ -34,13 +35,43 @@ export default {
             clientY: null,
             top: null,
             left: null,
+            resize: {
+                inUse: false,
+                clientY: null,
+            },
         };
     },
     methods: {
         active(component) {
             this.$emit('component-active', component, this.blockId);
         },
-    }
+        onMouseDown(e) {
+            if (!this.resize.inUse) {
+                this.resize.inUse = true;
+                this.resize.clientY = e.clientY;
+                this.resize.height = this.instanceData.height;
+            }
+        },
+        onMouseMove(e) {
+            if (this.resize.inUse) {
+                console.log(e.clientY - this.resize.clientY);
+                this.instanceData.height = this.resize.height + e.clientY - this.resize.clientY;
+            }
+        },
+        onMouseUp() {
+            if (this.resize.inUse) {
+                this.resize.inUse = false;
+            }
+        },
+    },
+    mounted() {
+        eventbus.on('canvas-mousemove', (e) => {
+            this.onMouseMove(e);
+        });
+        eventbus.on('canvas-mouseup', (e) => {
+            this.onMouseUp(e);
+        });
+    },
 }
 </script>
 <style scoped>

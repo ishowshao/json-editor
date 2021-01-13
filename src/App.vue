@@ -52,17 +52,7 @@ import eventbus from '@/lib/eventbus';
 import id from '@/lib/id';
 import schema2output from '@/lib/output';
 
-import block from './canvas/block/';
-import background from './canvas/background/';
-import size from './canvas/size/';
-import plainText from './canvas/plain-text/';
-
-const componentsMap = {
-    block,
-    background,
-    size,
-    'plain-text': plainText,
-};
+import componentsMap from '@/canvas/index';
 
 export default {
     name: 'App',

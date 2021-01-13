@@ -1,10 +1,10 @@
-import schema from './schema.json';
-import Component from './Component.vue';
+import schema from './schema.json'
+import Component from './Component.vue'
 
 const component = {
-    name: 'block',
-    schema,
-    component: Component,
-};
+  name: 'block',
+  schema,
+  component: Component
+}
 
-export default component;
+export default component

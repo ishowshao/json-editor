@@ -1,13 +1,13 @@
-import block from './block/';
-import background from './background/';
-import size from './size/';
-import plainText from './plain-text/';
+import block from './block/'
+import background from './background/'
+import size from './size/'
+import plainText from './plain-text/'
 
 const componentsMap = {
-    block,
-    background,
-    size,
-    'plain-text': plainText,
-};
+  block,
+  background,
+  size,
+  'plain-text': plainText
+}
 
-export default componentsMap;
+export default componentsMap

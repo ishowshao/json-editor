@@ -1,5 +1,5 @@
-import EventEmitter from './EventEmitter';
+import EventEmitter from './EventEmitter'
 
-const eventbus = new EventEmitter();
+const eventbus = new EventEmitter()
 
-export default eventbus;
+export default eventbus

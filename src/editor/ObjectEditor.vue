@@ -15,7 +15,7 @@
     </el-form>
 </template>
 <script>
-import id from '../../lib/id';
+import id from '../lib/id';
 
 export default {
     name: 'object-editor',

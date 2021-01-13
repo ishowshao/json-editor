@@ -52,10 +52,10 @@ import eventbus from '@/lib/eventbus';
 import id from '@/lib/id';
 import schema2output from '@/lib/output';
 
-import block from './components/components/block/';
-import background from './components/components/background/';
-import size from './components/components/size/';
-import plainText from './components/components/plain-text/';
+import block from './canvas/block/';
+import background from './canvas/background/';
+import size from './canvas/size/';
+import plainText from './canvas/plain-text/';
 
 const componentsMap = {
     block,
